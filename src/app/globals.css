@@ -36,13 +36,13 @@
   --color-accent-strong: var(--accent);
   --color-accent-soft: var(--surface);
 
-  --font-lat: var(--font-inter-tight);
+  --font-lat: "Pretendard";
 }
 
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-sans-kr), var(--font-inter-tight), Arial, Helvetica, sans-serif;
+  font-family: "Pretendard", var(--font-sans-kr), system-ui, sans-serif;
 }
 
 button,

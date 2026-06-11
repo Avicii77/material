@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { SectionHead } from "@/components/section-head";
 import { StatBand } from "@/components/stat-band";
-import { FeaturedLot } from "@/components/featured-lot";
 import { LotList } from "@/components/lot-list";
 import { StatusBanner } from "@/components/status-banner";
 import { getCurrentUser, getHomeListings } from "@/lib/queries";
@@ -30,23 +29,22 @@ const marketplaceSteps = [
 export default async function Home() {
   const [result, user] = await Promise.all([getHomeListings(), getCurrentUser()]);
   const lots = await buildLotViews(result.listings);
-  const [featured, ...rest] = lots;
 
   return (
     <main>
       <section className="border-b border-line">
-        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
           <p className="font-lat text-xs uppercase tracking-[0.22em] text-sub">
             Cosmetic Raw Material · Circular Market
           </p>
-          <h1 className="mt-6 max-w-4xl text-4xl font-light leading-[1.18] tracking-tight text-ink sm:text-5xl lg:text-[54px]">
+          <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-[1.18] tracking-tight text-ink sm:text-4xl">
             소량구매 · 마감임박 원료,{" "}
             <span className="font-bold text-brand">판매자와 직접 거래</span>합니다.
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-7 text-sub">
+          <p className="mt-4 max-w-xl text-base leading-7 text-sub">
             마감임박·잉여·소량 원료를 필요한 곳에 연결합니다. 원료 순환으로 비용을 줄이고, 중간 단계 없이 직접 거래하세요.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link href="/listings" className="rounded-full bg-accent px-7 py-3.5 text-center text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
               원료 검색하기
             </Link>
@@ -54,7 +52,7 @@ export default async function Home() {
               원료 등록하기
             </Link>
           </div>
-          <div className="mt-14">
+          <div className="mt-8">
             <StatBand
               stats={[
                 { value: "18종", label: "원료 카테고리" },
@@ -67,7 +65,7 @@ export default async function Home() {
       </section>
 
       <section className="border-b border-line">
-        <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+        <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
           <div className="lg:border-r lg:border-line lg:pr-8">
             <h2 className="text-2xl font-medium tracking-tight text-ink">이용 안내</h2>
             <p className="mt-4 max-w-xl text-sm leading-7 text-sub">
@@ -91,20 +89,13 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl space-y-8 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="mx-auto w-full max-w-7xl space-y-5 px-4 py-10 sm:px-6 lg:px-8">
         <SectionHead label="Recent Lots" title="최근 등록 원료" href="/listings" linkText="더 많은 원료 검색하기" />
         {result.configMissing ? (
           <StatusBanner>Supabase 환경변수 설정 전이라 등록 데이터가 비어 있습니다.</StatusBanner>
         ) : null}
         {result.error ? <StatusBanner type="error">{result.error}</StatusBanner> : null}
-        {featured ? (
-          <div className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
-            <FeaturedLot item={featured} />
-            <LotList items={rest} loggedIn={Boolean(user)} emptyText="추가 등록 원료가 없습니다." />
-          </div>
-        ) : (
-          <LotList items={lots} loggedIn={Boolean(user)} emptyText="등록된 원료가 없습니다." />
-        )}
+        <LotList items={lots} loggedIn={Boolean(user)} emptyText="등록된 원료가 없습니다." />
       </section>
     </main>
   );

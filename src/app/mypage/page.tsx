@@ -27,8 +27,8 @@ export default async function MyPage({ searchParams }: MyPageProps) {
   const error = Array.isArray(params.error) ? params.error[0] : params.error;
 
   return (
-    <main className="mx-auto w-full max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="pb-6">
+    <main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
+      <div className="pb-5">
         <p className="font-lat text-xs uppercase tracking-[0.2em] text-sub">Account workspace</p>
         <h1 className="mt-2 text-3xl font-medium tracking-tight text-ink">마이페이지</h1>
         <p className="mt-2 text-sm text-sub">내 등록물, 찜, 최근 본 원료, 프로필을 관리합니다.</p>
