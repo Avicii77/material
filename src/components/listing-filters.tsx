@@ -67,14 +67,14 @@ function CheckGrid({
   );
 }
 
-const inputClass = "rounded-lg border border-line px-3.5 py-2.5 text-sm outline-none focus:border-accent";
+const inputClass = "rounded-2xl border border-line bg-white px-3.5 py-2.5 text-sm outline-none focus:border-accent";
 
 export function ListingFilters({ searchParams }: { searchParams: SearchParams }) {
   const selectedFunctions = values(searchParams, "func");
   const selectedCerts = values(searchParams, "cert");
 
   return (
-    <form action="/listings" className="rounded-2xl border border-line bg-card p-5">
+    <form action="/listings" className="rounded-[30px] border border-line bg-card p-5 sm:p-6">
       <div className="flex flex-col gap-3 border-b border-line pb-4 lg:flex-row lg:items-end">
         <div className="grid flex-1 gap-3 md:grid-cols-4">
           <FieldLabel label="키워드">

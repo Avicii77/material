@@ -33,11 +33,11 @@ export default async function EditListingPage({
   const error = Array.isArray(query.error) ? query.error[0] : query.error;
 
   return (
-    <main className="mx-auto w-full max-w-5xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="border-b border-line pb-5">
-        <p className="text-sm font-bold uppercase tracking-[0.16em] text-accent">Edit inventory lot</p>
-        <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">원료수정</h1>
-        <p className="mt-2 text-sm text-slate-500">기존 사진은 유지되고 새 사진을 추가할 수 있습니다.</p>
+    <main className="mx-auto w-full max-w-5xl space-y-6 px-4 py-10 sm:px-6 lg:px-8">
+      <div className="border-b border-line pb-6">
+        <p className="font-lat text-xs uppercase tracking-[0.22em] text-sub">Edit inventory lot</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink">원료수정</h1>
+        <p className="mt-3 text-sm text-sub">기존 사진은 유지되고 새 사진을 추가할 수 있습니다.</p>
       </div>
       {error ? <StatusBanner type="error">{error}</StatusBanner> : null}
       <ListingForm action={`/api/listings/${id}`} listing={detail.listing} />

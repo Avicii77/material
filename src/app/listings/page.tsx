@@ -66,11 +66,14 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   const totalPages = Math.max(1, Math.ceil(result.count / result.pageSize));
 
   return (
-    <main className="mx-auto w-full max-w-7xl space-y-5 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-3 border-b border-line pb-6 sm:flex-row sm:items-end sm:justify-between">
+    <main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-10 sm:px-6 lg:px-8">
+      <div className="flex flex-col gap-5 border-b border-line pb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-lat text-xs uppercase tracking-[0.2em] text-sub">Search Inventory</p>
-          <h1 className="mt-2 text-3xl font-medium tracking-tight text-ink">원료 검색</h1>
+          <p className="font-lat text-xs uppercase tracking-[0.22em] text-sub">Search inventory</p>
+          <h1 className="mt-3 text-5xl font-semibold tracking-tight text-ink">원료 검색</h1>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-sub">
+            원료명, INCI, CAS-NO, 유효기한, 서류 보유 여부를 조합해 필요한 원료를 찾습니다.
+          </p>
         </div>
         <Link href="/listings/new" className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
           원료 등록

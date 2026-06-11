@@ -19,20 +19,22 @@ function CompactCard({ item, onClick }: { item: LotView; onClick: () => void }) 
     <button
       type="button"
       onClick={onClick}
-      className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-line bg-card text-left transition hover:border-accent/50"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-line bg-card text-left transition hover:-translate-y-0.5 hover:border-ink/30 hover:shadow-[0_18px_50px_rgb(20_23_26_/_0.07)]"
     >
       <div className="relative aspect-[4/3] bg-[linear-gradient(135deg,#eef1f3,#dfe4e8)]">
         {item.imageUrls[0] ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={item.imageUrls[0]} alt={item.title} className="size-full object-cover" />
-        ) : null}
+        ) : (
+          <img src="/recos-material-hero.png" alt="" className="size-full object-cover" />
+        )}
         {item.imminent ? (
           <span className="absolute left-2 top-2">
             <Badge tone="signal">임박</Badge>
           </span>
         ) : null}
       </div>
-      <div className="flex flex-1 flex-col p-3">
+      <div className="flex flex-1 flex-col p-4">
         <div className="truncate text-sm font-semibold text-ink">{item.title}</div>
         <div className="mt-1 truncate text-xs text-sub">CAS {item.casNo} · {item.supplier}</div>
         <div className="mt-2 flex items-center justify-between gap-2">
@@ -57,14 +59,16 @@ function ExpandedCard({
 }) {
   const docs = [item.hasMsds && "MSDS", item.hasCoa && "COA"].filter(Boolean).join(" · ") || "-";
   return (
-    <div className="rounded-xl border border-accent/40 bg-card p-4">
+    <div className="rounded-2xl border border-ink/20 bg-card p-4 sm:p-5">
       <div className="grid gap-5 sm:grid-cols-[280px_1fr]">
         <div>
           <div className="aspect-[4/3] overflow-hidden rounded-lg bg-[linear-gradient(135deg,#e9eef1,#d6dee3)]">
             {item.imageUrls[0] ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={item.imageUrls[0]} alt={item.title} className="size-full object-cover" />
-            ) : null}
+            ) : (
+              <img src="/recos-material-hero.png" alt="" className="size-full object-cover" />
+            )}
           </div>
           {item.imageUrls.length > 1 ? (
             <div className="mt-2 flex gap-2">
@@ -134,14 +138,14 @@ export function LotList({
 
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-line bg-card px-6 py-12 text-center text-sm text-sub">
+      <div className="rounded-[30px] border border-dashed border-line bg-surface px-6 py-12 text-center text-sm text-sub">
         {emptyText}
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
       {items.map((it) => {
         const open = openId === it.id;
         return (

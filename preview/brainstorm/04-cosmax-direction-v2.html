@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReCos · Cosmax 방향 시안 v2 (헤더 키움)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --surface:#f7f8f9; --ink:#14171a; --sub:#6b7280;
+    --line:#e8eaed; --line-soft:#f0f1f3; --signal:#c0492e;
+    --kr:"Noto Sans KR"; --lat:"Inter Tight";
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--kr),var(--lat),system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+  .banner{background:#0e1113;color:#cfd3d6;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:9px}
+  .frame{max-width:1180px;margin:0 auto;padding:0 32px}
+
+  /* header — enlarged */
+  header{display:flex;align-items:center;justify-content:space-between;height:88px;border-bottom:1px solid var(--line)}
+  .logo{font-family:var(--lat);font-weight:700;font-size:24px;letter-spacing:-.02em}
+  nav{display:flex;gap:38px;font-size:16px;font-weight:600;color:#2a2e33}
+  nav span{padding:6px 0;border-bottom:2px solid transparent;cursor:pointer}
+  nav span:hover{border-bottom-color:var(--ink)}
+  .hbtns{display:flex;gap:12px;align-items:center;font-size:15px}
+  .hbtns .ghost{color:var(--ink);font-weight:600;padding:12px 20px;border:1px solid var(--line);border-radius:9px}
+  .hbtns .solid{background:var(--ink);color:#fff;padding:12px 22px;border-radius:9px;font-weight:600}
+
+  /* hero */
+  .hero{padding:84px 0 70px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--lat);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--sub)}
+  .hero h1{font-family:var(--kr);font-weight:300;font-size:54px;line-height:1.18;letter-spacing:-.03em;margin-top:22px}
+  .hero h1 b{font-weight:700}
+  .hero p{margin-top:24px;font-size:16px;color:var(--sub);max-width:520px;line-height:1.7}
+  .hero .cta{margin-top:36px;display:flex;gap:12px}
+  .cta .solid{background:var(--ink);color:#fff;padding:15px 28px;border-radius:9px;font-size:15px;font-weight:600}
+  .cta .line{border:1px solid var(--line);padding:15px 28px;border-radius:9px;font-size:15px;font-weight:600;color:var(--ink)}
+  .stats{display:flex;gap:46px;margin-top:54px}
+  .stat .n{font-family:var(--lat);font-size:34px;font-weight:600;letter-spacing:-.02em}
+  .stat .l{font-size:12px;color:var(--sub);margin-top:4px;letter-spacing:.02em}
+
+  .sec{padding:72px 0}
+  .sechead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:34px}
+  .sechead .lab{font-family:var(--lat);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub)}
+  .sechead h2{font-weight:500;font-size:28px;letter-spacing:-.02em;margin-top:8px}
+  .sechead a{font-size:14px;color:var(--sub);font-weight:600}
+
+  .lots{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}
+  .feat{border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .feat .img{height:230px;background:linear-gradient(135deg,#eef1f3,#dfe4e8);position:relative}
+  .feat .pill{position:absolute;top:16px;left:16px;background:var(--signal);color:#fff;font-size:11px;font-weight:600;letter-spacing:.04em;padding:6px 11px;border-radius:99px}
+  .feat .body{padding:24px}
+  .feat .body .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .feat h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
+  .feat .inci{font-size:13px;color:var(--sub);margin-top:5px}
+  .feat .price{font-family:var(--lat);font-size:20px;font-weight:600;text-align:right}
+  .feat .price span{font-size:12px;color:var(--sub);font-weight:400}
+  .feat .specs{display:flex;gap:0;margin-top:22px;border-top:1px solid var(--line-soft);padding-top:18px}
+  .feat .specs .s{flex:1;border-left:1px solid var(--line-soft);padding-left:14px}
+  .feat .specs .s:first-child{border-left:0;padding-left:0}
+  .feat .specs .k{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
+  .feat .specs .v{font-size:14px;font-weight:600;margin-top:5px}
+  .feat .specs .v.exp{color:var(--signal)}
+
+  .clist{border:1px solid var(--line);border-radius:16px;padding:6px 20px}
+  .crow{display:flex;align-items:center;gap:14px;padding:17px 0;border-bottom:1px solid var(--line-soft)}
+  .crow:last-child{border-bottom:0}
+  .crow .th{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#eef1f3,#dfe4e8);flex:none}
+  .crow .nm{font-size:14.5px;font-weight:600}
+  .crow .mt{font-size:11.5px;color:var(--sub);margin-top:3px}
+  .crow .rt{margin-left:auto;text-align:right}
+  .crow .q{font-size:13px;font-weight:600}
+  .crow .e{font-size:11px;color:var(--sub);margin-top:3px}
+  .crow .e.soon{color:var(--signal)}
+
+  .foot{border-top:1px solid var(--line);padding:30px 0;font-size:12.5px;color:var(--sub);display:flex;justify-content:space-between}
+  @media(max-width:900px){.lots{grid-template-columns:1fr}.hero h1{font-size:38px}}
+</style>
+</head>
+<body>
+  <div class="banner">RECOS — v2 · 헤더 네비/로그인·회원가입 버튼 키움</div>
+  <div class="frame">
+    <header>
+      <div class="logo">ReCos</div>
+      <nav><span>원료 검색</span><span>원료 등록</span><span>이용 안내</span><span>마이페이지</span></nav>
+      <div class="hbtns"><span class="ghost">로그인</span><span class="solid">회원가입</span></div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">Cosmetic Raw Material · Circular Market</div>
+      <h1>소량구매 · 마감임박 원료,<br><b>판매자와 직접 거래</b>합니다.</h1>
+      <p>마감임박·잉여·소량 원료를 필요한 곳에 연결합니다. 원료 순환으로 비용을 줄이고, 중간 단계 없이 직접 거래하세요.</p>
+      <div class="cta"><span class="solid">원료 검색하기</span><span class="line">원료 등록하기</span></div>
+      <div class="stats">
+        <div class="stat"><div class="n">18종</div><div class="l">원료 카테고리</div></div>
+        <div class="stat"><div class="n">21개</div><div class="l">기능 태그</div></div>
+        <div class="stat"><div class="n">10일</div><div class="l">평균 매칭 소요</div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sechead">
+        <div><div class="lab">Recent Lots</div><h2>최근 등록 원료</h2></div>
+        <a>더 많은 원료 검색하기 →</a>
+      </div>
+      <div class="lots">
+        <div class="feat">
+          <div class="img"><div class="pill">마감임박 · 3개월</div></div>
+          <div class="body">
+            <div class="top">
+              <div><h3>Niacinamide</h3><div class="inci">CAS 98-92-0 · Seoul Lab</div></div>
+              <div class="price">₩48,000<br><span>/ kg</span></div>
+            </div>
+            <div class="specs">
+              <div class="s"><div class="k">수량</div><div class="v">25 kg</div></div>
+              <div class="s"><div class="k">유효기한</div><div class="v exp">2026.09</div></div>
+              <div class="s"><div class="k">서류</div><div class="v">MSDS · COA</div></div>
+              <div class="s"><div class="k">보관</div><div class="v">차광 · 미개봉</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="clist">
+          <div class="crow"><div class="th"></div><div><div class="nm">Tocopherol</div><div class="mt">CAS 59-02-9 · 5kg · Daehan</div></div><div class="rt"><div class="q">협의</div><div class="e soon">2026.07 · 1개월</div></div></div>
+          <div class="crow"><div class="th"></div><div><div class="nm">Centella Asiatica Extract</div><div class="mt">CAS 84696-21-9 · 12kg</div></div><div class="rt"><div class="q">₩120,000</div><div class="e">2027.01</div></div></div>
+          <div class="crow"><div class="th"></div><div><div class="nm">Retinol 10%</div><div class="mt">CAS 68-26-8 · 1kg · BioPure</div></div><div class="rt"><div class="q">₩890,000</div><div class="e">2026.12 · 6개월</div></div></div>
+          <div class="crow"><div class="th"></div><div><div class="nm">Sodium Hyaluronate</div><div class="mt">CAS 9067-32-7 · 3kg</div></div><div class="rt"><div class="q">₩210,000</div><div class="e">2027.03</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot"><span>© 2026 ReCos · 화장품 원료 순환 마켓</span><span>이용약관 · 면책 고지 · 문의</span></div>
+  </div>
+</body>
+</html>

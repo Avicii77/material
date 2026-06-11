@@ -2,14 +2,17 @@ import Link from "next/link";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line bg-band">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-8 text-sm text-white/70 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-        <p>© {new Date().getFullYear()} ReCos · 화장품 원료 순환 마켓</p>
-        <div className="flex gap-5 font-semibold">
-          <Link className="hover:text-white" href="/terms">
-            약관·면책
+    <footer className="border-t border-line bg-bg">
+      <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-3 px-5 py-8 text-[12.5px] text-sub sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <span>© {new Date().getFullYear()} ReCos · 화장품 원료 순환 마켓</span>
+        <div className="flex flex-wrap gap-x-5 gap-y-2 font-semibold">
+          <Link className="hover:text-ink" href="/terms">
+            이용약관
           </Link>
-          <a className="hover:text-white" href="mailto:contact@recos.local">
+          <Link className="hover:text-ink" href="/terms">
+            면책 고지
+          </Link>
+          <a className="hover:text-ink" href="mailto:contact@recos.local">
             문의
           </a>
         </div>

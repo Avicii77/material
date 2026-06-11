@@ -29,4 +29,7 @@ The app builds and boots with missing placeholder env, but data and auth flows r
 1. Create a Supabase project.
 2. Fill `.env.local` with URL, anon key, and service role key.
 3. Apply `supabase/migrations/0001_init.sql`.
-4. Configure Auth Google OAuth and redirect URLs.
+4. Apply `supabase/migrations/0002_early_access_leads.sql`.
+5. Configure Auth Google OAuth and redirect URLs.
+
+See `docs/SUPABASE_SETUP.md` for the full local setup checklist.
