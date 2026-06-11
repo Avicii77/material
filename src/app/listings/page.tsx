@@ -70,7 +70,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       <div className="flex flex-col gap-5 border-b border-line pb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-lat text-xs uppercase tracking-[0.22em] text-sub">Search inventory</p>
-          <h1 className="mt-3 text-5xl font-semibold tracking-tight text-ink">원료 검색</h1>
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">원료 검색</h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-sub">
             원료명, INCI, CAS-NO, 유효기한, 서류 보유 여부를 조합해 필요한 원료를 찾습니다.
           </p>
