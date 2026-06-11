@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import { Fragment_Mono, Noto_Sans_KR } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -8,6 +8,13 @@ const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans-kr",
+  display: "swap",
+});
+
+const fragmentMono = Fragment_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-fragment-mono",
   display: "swap",
 });
 
@@ -22,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${notoSansKr.variable} h-full`}>
+    <html lang="ko" className={`${notoSansKr.variable} ${fragmentMono.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-bg text-ink antialiased">
         <link
           rel="stylesheet"

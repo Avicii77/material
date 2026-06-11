@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f2f0eb;        /* Neutral Warm — 페이지 캔버스 */
-  --surface: #edebe9;   /* Ceramic — 호버/구분 존 */
-  --card: #ffffff;      /* White — 카드 면 */
-  --ink: #1a1a1a;       /* Text Black (≈0.87) */
-  --sub: #6b6b6b;       /* Text Black Soft */
-  --line: #e0ddd6;      /* warm hairline */
-  --line-soft: #ebe8e2;
-  --brand: #006241;     /* Starbucks Green — 로고/브랜드 헤딩 */
-  --accent: #00754A;    /* Green Accent — CTA */
-  --band: #1E3932;      /* House Green — 푸터/밴드 */
-  --signal: #c82014;    /* Red — 임박/에러 */
+  --bg: #f9f8f8;        /* warm off-white canvas */
+  --surface: #f1ebe5;   /* cream surface */
+  --card: #ffffff;      /* white card */
+  --ink: #1a1615;       /* warm near-black text */
+  --sub: #757170;       /* warm grey */
+  --line: #e4e2e2;      /* warm hairline */
+  --line-soft: #efeae6;
+  --brand: #1a1615;     /* logo/brand heading */
+  --accent: #1a1615;    /* CTA */
+  --band: #1a1615;      /* footer/dark band */
+  --signal: #b3401f;    /* warm terracotta */
 }
 
 @theme inline {
@@ -36,7 +36,7 @@
   --color-accent-strong: var(--accent);
   --color-accent-soft: var(--surface);
 
-  --font-lat: "Pretendard";
+  --font-lat: var(--font-fragment-mono);
 }
 
 body {
