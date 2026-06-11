@@ -205,7 +205,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
                     <input type="hidden" name="intent" value="status" />
                     <input type="hidden" name="status" value={status} />
                     <button className="w-full rounded-full border border-line px-3 py-2 text-sm font-bold hover:bg-surface">
-                      {statusLabel(status)}로 변경
+                      {statusLabel(status)}
                     </button>
                   </form>
                 ))}
