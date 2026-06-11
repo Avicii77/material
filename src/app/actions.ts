@@ -51,11 +51,11 @@ export async function submitEarlyAccess(data: EarlyAccessSubmission) {
     } else {
       // Graceful degradation: save to local JSON file
       const filePath = path.join(process.cwd(), "early_access_submissions.json");
-      let existing: any[] = [];
+      let existing: Record<string, unknown>[] = [];
       try {
         const fileContent = await fs.readFile(filePath, "utf-8");
         existing = JSON.parse(fileContent);
-      } catch (e) {
+      } catch {
         // File doesn't exist yet, proceed with empty array
       }
 
@@ -74,7 +74,7 @@ export async function submitEarlyAccess(data: EarlyAccessSubmission) {
         message: "로컬 파일(early_access_submissions.json)에 성공적으로 저장되었습니다. (Supabase 미연결)",
       };
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Action error:", error);
     return { success: false, error: "서버 처리 중 오류가 발생했습니다." };
   }
