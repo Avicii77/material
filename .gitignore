@@ -48,3 +48,6 @@ next-env.d.ts
 
 # local server logs
 *.log
+
+# Superpowers brainstorming companion
+.superpowers/
