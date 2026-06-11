@@ -42,7 +42,7 @@ export async function SiteHeader() {
               <Link className="rounded-[9px] border border-line bg-card px-5 py-3 text-ink hover:bg-surface" href="/login">
                 로그인
               </Link>
-              <a className="rounded-[9px] bg-accent px-5 py-3 text-white transition hover:opacity-90 active:scale-95" href="/#early-access">
+              <a className="rounded-[9px] bg-accent px-5 py-3 text-white transition hover:opacity-90 active:scale-95" href="/signup">
                 회원가입
               </a>
             </>
@@ -73,7 +73,7 @@ export async function SiteHeader() {
                 <Link className="block rounded-xl px-3 py-2 text-sm font-semibold text-ink hover:bg-surface" href="/login">
                   로그인
                 </Link>
-                <a className="mt-2 block rounded-[9px] bg-accent px-3 py-2 text-center text-sm font-semibold text-white" href="/#early-access">
+                <a className="mt-2 block rounded-[9px] bg-accent px-3 py-2 text-center text-sm font-semibold text-white" href="/signup">
                   회원가입
                 </a>
               </>

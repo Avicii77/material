@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fragment_Mono, Noto_Sans_KR } from "next/font/google";
+import { Inter_Tight, Noto_Sans_KR } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -11,10 +11,10 @@ const notoSansKr = Noto_Sans_KR({
   display: "swap",
 });
 
-const fragmentMono = Fragment_Mono({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-fragment-mono",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter-tight",
   display: "swap",
 });
 
@@ -29,12 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${notoSansKr.variable} ${fragmentMono.variable} h-full`}>
+    <html lang="ko" className={`${notoSansKr.variable} ${interTight.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-bg text-ink antialiased">
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
-        />
+        <div className="bg-band py-[9px] text-center text-[11px] uppercase tracking-[0.14em] text-[#cfd3d6]">
+          RECOS · COSMETIC RAW MATERIAL CIRCULAR MARKET
+        </div>
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />

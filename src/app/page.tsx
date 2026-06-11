@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { EarlyAccessForm } from "@/components/early-access-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SectionHead } from "@/components/section-head";
 import { StatusBanner } from "@/components/status-banner";
@@ -195,7 +194,7 @@ export default async function Home() {
               {[
                 ["18종", "원료 카테고리"],
                 ["21개", "기능 태그"],
-                ["10분", "평균 매칭 소요"],
+                ["10일", "평균 매칭 소요"],
               ].map(([value, label]) => (
                 <div key={label}>
                   <div className="font-lat text-[34px] font-semibold tracking-tight text-ink">{value}</div>
@@ -231,40 +230,6 @@ export default async function Home() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="border-t border-line bg-card py-16">
-        <div className="mx-auto grid w-full max-w-[1180px] gap-8 px-5 sm:px-8 lg:grid-cols-3">
-          {[
-            ["조건 탐색", "원료명, INCI, CAS-NO, 유효기한, 서류 보유 여부를 한 번에 좁힙니다."],
-            ["정보 확인", "실물 사진, 보관 상태, MSDS와 COA 보유 여부를 거래 전에 확인합니다."],
-            ["직접 연결", "로그인 후 권한이 확인된 구매자에게 판매자 연락처를 안전하게 공개합니다."],
-          ].map(([title, body]) => (
-            <ScrollReveal key={title}>
-              <article className="border-t border-line pt-5">
-                <h2 className="text-xl font-semibold tracking-tight text-ink">{title}</h2>
-                <p className="mt-3 text-sm leading-6 text-sub">{body}</p>
-              </article>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section id="early-access" className="border-t border-line bg-bg py-16 lg:py-20">
-        <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <ScrollReveal className="mb-10 text-center">
-            <p className="font-lat text-xs font-semibold uppercase tracking-[0.22em] text-sub">Join Beta Launch</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              ReCos 사전 등록하기
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-sub">
-              제조사, 브랜드사, 원료 유통사를 위한 베타 오픈 안내와 우선 혜택을 이메일로 보내드립니다.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal>
-            <EarlyAccessForm />
-          </ScrollReveal>
         </div>
       </section>
     </main>
