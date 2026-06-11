@@ -18,7 +18,6 @@ type PreviewLot = Pick<
   | "expiryLabel"
   | "imminent"
   | "priceLabel"
-  | "imageUrls"
   | "hasMsds"
   | "hasCoa"
   | "storageText"
@@ -35,7 +34,6 @@ const sampleLots: PreviewLot[] = [
     expiryLabel: "2026.09",
     imminent: true,
     priceLabel: "₩8,000 / kg",
-    imageUrls: [],
     hasMsds: true,
     hasCoa: true,
     storageText: "차광 보관",
@@ -50,7 +48,6 @@ const sampleLots: PreviewLot[] = [
     expiryLabel: "2026.07",
     imminent: true,
     priceLabel: "협의",
-    imageUrls: [],
     hasMsds: true,
     hasCoa: false,
     storageText: "상온 보관",
@@ -65,7 +62,6 @@ const sampleLots: PreviewLot[] = [
     expiryLabel: "2027.01",
     imminent: false,
     priceLabel: "₩20,000 / kg",
-    imageUrls: [],
     hasMsds: true,
     hasCoa: true,
     storageText: "냉장 보관",
@@ -80,35 +76,21 @@ const sampleLots: PreviewLot[] = [
     expiryLabel: "2026.12",
     imminent: false,
     priceLabel: "₩90,000 / kg",
-    imageUrls: [],
     hasMsds: true,
     hasCoa: true,
     storageText: "차광 보관",
   },
 ];
 
-function MaterialImage({ item, featured = false }: { item: PreviewLot; featured?: boolean }) {
-  const src = item.imageUrls[0] ?? "/recos-material-hero.png";
-
-  return (
-    <div className={`relative overflow-hidden bg-[linear-gradient(135deg,#eef1f3,#dfe4e8)] ${featured ? "h-[230px]" : "size-[46px] rounded-[10px]"}`}>
-      <img src={src} alt="" className="size-full object-cover" />
-      {featured && item.imminent ? (
-        <span className="absolute left-4 top-4 rounded-full bg-signal px-3 py-1.5 text-[11px] font-semibold tracking-wide text-white">
-          마감임박
-        </span>
-      ) : null}
-    </div>
-  );
-}
-
 function FeaturedMaterial({ item }: { item: PreviewLot }) {
   const docs = [item.hasMsds && "MSDS", item.hasCoa && "COA"].filter(Boolean).join(" · ") || "확인 필요";
 
   return (
     <Link href={item.id.startsWith("sample-") ? "/listings" : `/listings/${item.id}`} className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-card transition hover:-translate-y-0.5 hover:border-ink/25">
-      <MaterialImage item={item} featured />
       <div className="p-6">
+        {item.imminent ? (
+          <span className="mb-3 inline-block rounded-full bg-signal px-3 py-1 text-[11px] font-semibold tracking-wide text-white">마감임박</span>
+        ) : null}
         <div className="flex items-start justify-between gap-5">
           <div>
             <h3 className="text-[22px] font-semibold tracking-tight text-ink">{item.title}</h3>
@@ -139,7 +121,6 @@ function FeaturedMaterial({ item }: { item: PreviewLot }) {
 function CompactMaterialRow({ item }: { item: PreviewLot }) {
   return (
     <Link href={item.id.startsWith("sample-") ? "/listings" : `/listings/${item.id}`} className="flex items-center gap-3 border-b border-line-soft py-4 last:border-b-0">
-      <MaterialImage item={item} />
       <div className="min-w-0">
         <div className="truncate text-[14.5px] font-semibold text-ink">{item.title}</div>
         <div className="mt-1 truncate text-[11.5px] text-sub">
@@ -160,7 +141,8 @@ function CompactMaterialRow({ item }: { item: PreviewLot }) {
 export default async function Home() {
   const result = await getHomeListings();
   const realLots = await buildLotViews(result.listings);
-  const lots: PreviewLot[] = realLots.length > 0 ? realLots.slice(0, 5) : sampleLots;
+  const isDemo = realLots.length === 0;
+  const lots: PreviewLot[] = isDemo ? sampleLots : realLots.slice(0, 5);
   const [featured, ...compactLots] = lots;
 
   return (
@@ -172,12 +154,12 @@ export default async function Home() {
               Cosmetic raw material · Circular market
             </p>
             <h1 className="mt-6 max-w-4xl text-[38px] font-light leading-[1.18] tracking-tight text-ink sm:text-[54px]">
-              소량구매 · 마감임박 원료,
+              유효기한이 남은 원료를,
               <br />
-              <strong className="font-bold">판매자와 직접 거래</strong>합니다.
+              <strong className="font-bold">그냥 버리고 계신가요?</strong>
             </h1>
             <p className="mt-6 max-w-[520px] text-base leading-7 text-sub">
-              마감임박, 잉여, 소량 원료를 필요한 곳에 연결합니다. 원료 순환으로 비용을 줄이고 중간 단계 없이 거래 조건을 확인하세요.
+              소량이 필요한 곳과 직접 연결해, 낭비와 비용을 동시에 줄입니다.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/listings" className="rounded-[9px] bg-ink px-7 py-4 text-center text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
@@ -188,21 +170,6 @@ export default async function Home() {
               </Link>
             </div>
           </ScrollReveal>
-
-          <ScrollReveal className="mt-14">
-            <div className="flex flex-wrap gap-x-12 gap-y-6">
-              {[
-                ["18종", "원료 카테고리"],
-                ["21개", "기능 태그"],
-                ["10일", "평균 매칭 소요"],
-              ].map(([value, label]) => (
-                <div key={label}>
-                  <div className="font-lat text-[34px] font-semibold tracking-tight text-ink">{value}</div>
-                  <div className="mt-1 text-xs tracking-wide text-sub">{label}</div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
@@ -210,6 +177,9 @@ export default async function Home() {
         <div className="mx-auto w-full max-w-[1180px] px-5 sm:px-8">
           <ScrollReveal>
             <SectionHead label="Recent Lots" title="최근 등록 원료" href="/listings" linkText="더 많은 원료 검색하기" />
+            {isDemo ? (
+              <span className="mt-3 inline-block rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-semibold text-sub">예시 데이터</span>
+            ) : null}
           </ScrollReveal>
           {result.configMissing ? (
             <div className="mt-5">

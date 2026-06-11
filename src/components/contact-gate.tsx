@@ -35,7 +35,6 @@ export function ContactGate({
   return (
     <dl className="space-y-3 text-sm">
       <Row k="담당자" v={contact.contact_name} />
-      <Row k="회사명" v={contact.company_name} />
       <Row k="전화" v={contact.phone} />
       <Row k="이메일" v={contact.contact_email} />
     </dl>
