@@ -41,16 +41,16 @@ export default async function Home() {
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-light leading-[1.18] tracking-tight text-ink sm:text-5xl lg:text-[54px]">
             소량구매 · 마감임박 원료,{" "}
-            <span className="font-bold">판매자와 직접 거래</span>합니다.
+            <span className="font-bold text-brand">판매자와 직접 거래</span>합니다.
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-sub">
             마감임박·잉여·소량 원료를 필요한 곳에 연결합니다. 원료 순환으로 비용을 줄이고, 중간 단계 없이 직접 거래하세요.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/listings" className="rounded-lg bg-ink px-7 py-3.5 text-center text-sm font-semibold text-white hover:opacity-90">
+            <Link href="/listings" className="rounded-full bg-accent px-7 py-3.5 text-center text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
               원료 검색하기
             </Link>
-            <Link href="/listings/new" className="rounded-lg border border-line px-7 py-3.5 text-center text-sm font-semibold text-ink hover:bg-surface">
+            <Link href="/listings/new" className="rounded-full border border-accent px-7 py-3.5 text-center text-sm font-semibold text-accent hover:bg-surface">
               원료 등록하기
             </Link>
           </div>

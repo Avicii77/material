@@ -73,7 +73,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           {ownerCanEdit ? (
             <Link
               href={`/listings/${listing.id}/edit`}
-              className="rounded-lg border border-line px-4 py-2.5 text-sm font-semibold text-ink hover:bg-surface"
+              className="rounded-full border border-line px-4 py-2.5 text-sm font-semibold text-ink hover:bg-surface"
             >
               수정
             </Link>
@@ -104,7 +104,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
             )}
           </div>
 
-          <div className="rounded-2xl border border-line bg-white p-6">
+          <div className="rounded-2xl border border-line bg-card p-6">
             <h2 className="text-xl font-semibold tracking-tight text-ink">전체 정보</h2>
             <dl className="mt-5 grid gap-4 sm:grid-cols-2">
               <InfoItem label="수량">{formatNumber(listing.quantity)} {listing.unit}</InfoItem>
@@ -154,14 +154,14 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
         </div>
 
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-2xl border border-line bg-white p-6">
+          <div className="rounded-2xl border border-line bg-card p-6">
             <h2 className="text-xl font-semibold tracking-tight text-ink">연락처</h2>
             <div className="mt-4">
               <ContactGate contact={detail.contact} listingId={listing.id} />
             </div>
           </div>
 
-          <div className="rounded-2xl border border-line bg-white p-6">
+          <div className="rounded-2xl border border-line bg-card p-6">
             <h2 className="text-xl font-semibold tracking-tight text-ink">서류</h2>
             <div className="mt-4 space-y-2 text-sm">
               {(listing.listing_docs ?? []).length > 0 ? (
@@ -170,7 +170,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
                     <a
                       key={doc.id}
                       href={doc.signed_url}
-                      className="block rounded-lg border border-ink px-3 py-2 font-bold text-ink hover:bg-surface"
+                      className="block rounded-full border border-ink px-3 py-2 font-bold text-ink hover:bg-surface"
                     >
                       {doc.doc_type.toUpperCase()} 다운로드
                     </a>
@@ -189,28 +189,28 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           {detail.user ? (
             <form action="/api/bookmarks" method="post" className="rounded-2xl border border-line bg-white p-6">
               <input type="hidden" name="listing_id" value={listing.id} />
-              <button className="w-full rounded-lg border border-ink px-4 py-2 text-sm font-bold text-ink hover:bg-surface">
+              <button className="w-full rounded-full border border-ink px-4 py-2 text-sm font-bold text-ink hover:bg-surface">
                 찜 토글
               </button>
             </form>
           ) : null}
 
           {ownerCanEdit ? (
-            <div className="rounded-2xl border border-line bg-white p-6">
+            <div className="rounded-2xl border border-line bg-card p-6">
               <h2 className="text-xl font-semibold tracking-tight text-ink">소유자 작업</h2>
               <div className="mt-4 grid gap-2">
                 {["available", "reserved", "completed"].map((status) => (
                   <form key={status} action={`/api/listings/${listing.id}`} method="post">
                     <input type="hidden" name="intent" value="status" />
                     <input type="hidden" name="status" value={status} />
-                    <button className="w-full rounded-lg border border-line px-3 py-2 text-sm font-bold hover:bg-surface">
+                    <button className="w-full rounded-full border border-line px-3 py-2 text-sm font-bold hover:bg-surface">
                       {statusLabel(status)}로 변경
                     </button>
                   </form>
                 ))}
                 <form action={`/api/listings/${listing.id}`} method="post">
                   <input type="hidden" name="intent" value="delete" />
-                  <button className="w-full rounded-lg border border-signal/40 px-3 py-2 text-sm font-bold text-signal hover:bg-signal/5">
+                  <button className="w-full rounded-full border border-signal/40 px-3 py-2 text-sm font-bold text-signal hover:bg-signal/5">
                     삭제
                   </button>
                 </form>

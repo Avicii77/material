@@ -54,7 +54,7 @@ export default async function MyPage({ searchParams }: MyPageProps) {
         <LotList items={recentLots} loggedIn emptyText="최근 본 원료가 없습니다." />
       </section>
 
-      <section className="rounded-2xl border border-line bg-white p-6">
+      <section className="rounded-2xl border border-line bg-card p-6">
         <h2 className="text-xl font-semibold tracking-tight text-ink">프로필 수정</h2>
         <p className="mt-1 text-sm text-sub">
           상세 페이지의 연락처 블록에 노출되는 정보입니다. 로그인 사용자에게만 표시됩니다.
@@ -65,7 +65,7 @@ export default async function MyPage({ searchParams }: MyPageProps) {
             <input
               name="display_name"
               defaultValue={data.profile?.display_name ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -73,7 +73,7 @@ export default async function MyPage({ searchParams }: MyPageProps) {
             <input
               name="contact_name"
               defaultValue={data.profile?.contact_name ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -81,7 +81,7 @@ export default async function MyPage({ searchParams }: MyPageProps) {
             <input
               name="company_name"
               defaultValue={data.profile?.company_name ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -89,7 +89,7 @@ export default async function MyPage({ searchParams }: MyPageProps) {
             <input
               name="phone"
               defaultValue={data.profile?.phone ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -98,7 +98,7 @@ export default async function MyPage({ searchParams }: MyPageProps) {
               type="email"
               name="contact_email"
               defaultValue={data.profile?.contact_email ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -106,11 +106,11 @@ export default async function MyPage({ searchParams }: MyPageProps) {
             <input
               name="region"
               defaultValue={data.profile?.region ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
           <div className="md:col-span-2">
-            <button className="rounded-lg bg-ink px-6 py-3 text-sm font-semibold text-white hover:opacity-90">
+            <button className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
               프로필 저장
             </button>
           </div>

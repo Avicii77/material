@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #ffffff;
-  --surface: #f7f8f9;
-  --ink: #14171a;
-  --sub: #6b7280;
-  --line: #e8eaed;
-  --line-soft: #f0f1f3;
-  --signal: #c0492e;
+  --bg: #f2f0eb;        /* Neutral Warm — 페이지 캔버스 */
+  --surface: #edebe9;   /* Ceramic — 호버/구분 존 */
+  --card: #ffffff;      /* White — 카드 면 */
+  --ink: #1a1a1a;       /* Text Black (≈0.87) */
+  --sub: #6b6b6b;       /* Text Black Soft */
+  --line: #e0ddd6;      /* warm hairline */
+  --line-soft: #ebe8e2;
+  --brand: #006241;     /* Starbucks Green — 로고/브랜드 헤딩 */
+  --accent: #00754A;    /* Green Accent — CTA */
+  --band: #1E3932;      /* House Green — 푸터/밴드 */
+  --signal: #c82014;    /* Red — 임박/에러 */
 }
 
 @theme inline {
@@ -17,6 +21,10 @@
   --color-sub: var(--sub);
   --color-line: var(--line);
   --color-line-soft: var(--line-soft);
+  --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-band: var(--band);
   --color-signal: var(--signal);
 
   /* 신토큰 별칭 (페이지가 쓰는 기존 이름 유지용) */
@@ -25,8 +33,7 @@
   --color-surface-muted: var(--surface);
 
   /* 레거시 accent → 무채색 재매핑 (미마이그레이션 페이지 graceful degrade) */
-  --color-accent: var(--ink);
-  --color-accent-strong: var(--ink);
+  --color-accent-strong: var(--accent);
   --color-accent-soft: var(--surface);
 
   --font-lat: var(--font-inter-tight);

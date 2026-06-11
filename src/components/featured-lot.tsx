@@ -16,7 +16,7 @@ export function FeaturedLot({ item }: { item: LotView }) {
   return (
     <Link
       href={`/listings/${item.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-line transition-colors hover:border-ink/30"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-card transition-colors hover:border-ink/30"
     >
       <div className="relative h-56 bg-[linear-gradient(135deg,#eef1f3,#dfe4e8)]">
         {item.imageUrls[0] ? (

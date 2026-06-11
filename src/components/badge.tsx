@@ -9,7 +9,7 @@ export function Badge({ children, tone = "neutral" }: BadgeProps) {
       ? "bg-signal text-white"
       : tone === "muted"
         ? "bg-surface text-sub"
-        : "bg-[#eef1f3] text-[#3c4045]";
+        : "bg-[#d4e9e2] text-[#006241]";
   return (
     <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold ${cls}`}>
       {children}

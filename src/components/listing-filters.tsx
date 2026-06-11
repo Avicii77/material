@@ -67,14 +67,14 @@ function CheckGrid({
   );
 }
 
-const inputClass = "rounded-lg border border-line px-3.5 py-2.5 text-sm outline-none focus:border-ink";
+const inputClass = "rounded-lg border border-line px-3.5 py-2.5 text-sm outline-none focus:border-accent";
 
 export function ListingFilters({ searchParams }: { searchParams: SearchParams }) {
   const selectedFunctions = values(searchParams, "func");
   const selectedCerts = values(searchParams, "cert");
 
   return (
-    <form action="/listings" className="rounded-2xl border border-line bg-white p-5">
+    <form action="/listings" className="rounded-2xl border border-line bg-card p-5">
       <div className="flex flex-col gap-3 border-b border-line pb-4 lg:flex-row lg:items-end">
         <div className="grid flex-1 gap-3 md:grid-cols-4">
           <FieldLabel label="키워드">
@@ -123,10 +123,10 @@ export function ListingFilters({ searchParams }: { searchParams: SearchParams })
           </FieldLabel>
         </div>
         <div className="flex gap-2">
-          <Link className="inline-flex items-center rounded-lg border border-line px-4 py-2.5 text-sm font-semibold text-ink hover:bg-surface" href="/listings">
+          <Link className="inline-flex items-center rounded-full border border-line px-4 py-2.5 text-sm font-semibold text-ink hover:bg-surface" href="/listings">
             초기화
           </Link>
-          <button className="rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90">
+          <button className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
             검색
           </button>
         </div>

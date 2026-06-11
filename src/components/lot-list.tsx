@@ -99,7 +99,7 @@ function LotRow({
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link
                   href={`/listings/${item.id}`}
-                  className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
+                  className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95"
                 >
                   자세히 보기 →
                 </Link>
@@ -132,7 +132,7 @@ export function LotList({
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-line">
+    <div className="overflow-hidden rounded-2xl border border-line bg-card">
       {items.map((it) => (
         <LotRow
           key={it.id}

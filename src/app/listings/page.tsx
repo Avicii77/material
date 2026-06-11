@@ -72,7 +72,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
           <p className="font-lat text-xs uppercase tracking-[0.2em] text-sub">Search Inventory</p>
           <h1 className="mt-2 text-3xl font-medium tracking-tight text-ink">원료 검색</h1>
         </div>
-        <Link href="/listings/new" className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white hover:opacity-90">
+        <Link href="/listings/new" className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
           원료 등록
         </Link>
       </div>
@@ -98,14 +98,14 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         <div className="flex items-center justify-between border-t border-line pt-4 text-sm">
           <Link
             href={pageHref(params, Math.max(1, result.page - 1))}
-            className={`rounded-lg border border-line px-4 py-2.5 font-semibold ${result.page <= 1 ? "pointer-events-none text-sub/40" : "text-ink hover:bg-surface"}`}
+            className={`rounded-full border border-line px-4 py-2.5 font-semibold ${result.page <= 1 ? "pointer-events-none text-sub/40" : "text-ink hover:bg-surface"}`}
           >
             이전
           </Link>
           <span className="text-sub">{result.page} / {totalPages}</span>
           <Link
             href={pageHref(params, Math.min(totalPages, result.page + 1))}
-            className={`rounded-lg border border-line px-4 py-2.5 font-semibold ${result.page >= totalPages ? "pointer-events-none text-sub/40" : "text-ink hover:bg-surface"}`}
+            className={`rounded-full border border-line px-4 py-2.5 font-semibold ${result.page >= totalPages ? "pointer-events-none text-sub/40" : "text-ink hover:bg-surface"}`}
           >
             다음
           </Link>

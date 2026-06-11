@@ -15,7 +15,7 @@ type ListingFormProps = {
   listing?: Listing | null;
 };
 
-const field = "rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm outline-none focus:border-ink";
+const field = "rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm outline-none focus:border-accent";
 
 export function ListingForm({ action, listing }: ListingFormProps) {
   const [negotiable, setNegotiable] = useState(Boolean(listing?.price_negotiable));
@@ -26,7 +26,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
       action={action}
       method="post"
       encType="multipart/form-data"
-      className="space-y-7 rounded-2xl border border-line bg-white p-6"
+      className="space-y-7 rounded-2xl border border-line bg-card p-6"
     >
       <input type="hidden" name="intent" value="save" />
 
@@ -338,7 +338,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
       </label>
 
       <div className="flex justify-end">
-        <button className="rounded-lg bg-ink px-6 py-3 text-sm font-semibold text-white hover:opacity-90">
+        <button className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
           저장
         </button>
       </div>

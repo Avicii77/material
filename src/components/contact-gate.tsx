@@ -25,7 +25,7 @@ export function ContactGate({
         </p>
         <Link
           href={`/login?next=/listings/${listingId}`}
-          className="mt-3 inline-block rounded-lg bg-ink px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+          className="mt-3 inline-block rounded-full bg-accent px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95"
         >
           로그인
         </Link>

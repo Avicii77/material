@@ -25,7 +25,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </div>
         {error ? <StatusBanner type="error">{error}</StatusBanner> : null}
         {message ? <StatusBanner type="success">{message}</StatusBanner> : null}
-        <form action={signInWithEmail} className="space-y-4 rounded-2xl border border-line bg-white p-6">
+        <form action={signInWithEmail} className="space-y-4 rounded-2xl border border-line bg-card p-6">
           <input type="hidden" name="next" value={next ?? "/mypage"} />
           <label className="flex flex-col gap-1 text-sm">
             <span className="font-semibold text-ink">이메일</span>
@@ -33,7 +33,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               type="email"
               name="email"
               required
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -42,16 +42,16 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               type="password"
               name="password"
               required
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm"
+              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
-          <button className="w-full rounded-lg bg-ink px-4 py-2.5 text-sm font-bold text-white hover:opacity-90">
+          <button className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-bold text-white transition hover:opacity-90 active:scale-95">
             이메일 로그인
           </button>
         </form>
         <form action={signInWithGoogle}>
           <input type="hidden" name="next" value={next ?? "/mypage"} />
-          <button className="w-full rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-bold hover:bg-surface">
+          <button className="w-full rounded-full border border-line bg-white px-4 py-2.5 text-sm font-bold hover:bg-surface">
             Google로 로그인
           </button>
         </form>
@@ -63,7 +63,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </p>
       </section>
 
-      <aside className="rounded-2xl border border-line bg-white p-6">
+      <aside className="rounded-2xl border border-line bg-card p-6">
         <h2 className="text-xl font-semibold tracking-tight text-ink">로그인이 필요한 이유</h2>
         <div className="mt-5 space-y-4 text-sm leading-6 text-sub">
           <p>연락처는 거래 의사가 있는 사용자에게만 노출됩니다.</p>
