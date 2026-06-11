@@ -28,18 +28,13 @@ function CompactCard({ item, onClick }: { item: LotView; onClick: () => void }) 
         ) : (
           <img src="/recos-material-hero.png" alt="" className="size-full object-cover" />
         )}
-        {item.imminent ? (
-          <span className="absolute left-2 top-2">
-            <Badge tone="signal">임박</Badge>
-          </span>
-        ) : null}
       </div>
       <div className="flex flex-1 flex-col p-4">
         <div className="truncate text-sm font-semibold text-ink">{item.title}</div>
         <div className="mt-1 truncate text-xs text-sub">CAS {item.casNo} · {item.supplier}</div>
         <div className="mt-2 flex items-center justify-between gap-2">
           <span className="text-sm font-bold text-ink">{item.priceLabel}</span>
-          <span className={`shrink-0 text-[11px] ${item.expired || item.imminent ? "text-signal" : "text-sub"}`}>
+          <span className={`shrink-0 text-[11px] ${item.expired ? "text-signal" : "text-sub"}`}>
             {item.expiryLabel}
           </span>
         </div>
@@ -94,7 +89,6 @@ function ExpandedCard({
             </button>
           </div>
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {item.imminent ? <Badge tone="signal">마감임박</Badge> : null}
             {item.functionTags.slice(0, 4).map((t) => (
               <Badge key={t}>{t}</Badge>
             ))}
@@ -104,7 +98,7 @@ function ExpandedCard({
           </div>
           <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-line-soft py-3 sm:grid-cols-4">
             <Spec k="수량" v={`${item.quantity} ${item.unit}`} />
-            <Spec k="유효기한" v={item.expiryLabel} signal={item.expired || item.imminent} />
+            <Spec k="유효기한" v={item.expiryLabel} signal={item.expired} />
             <Spec k="가격" v={item.priceLabel} />
             <Spec k="서류" v={docs} />
           </dl>

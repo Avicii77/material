@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SectionHead } from "@/components/section-head";
 import { StatusBanner } from "@/components/status-banner";
+import { TradeNotice } from "@/components/trade-notice";
 import { getHomeListings } from "@/lib/queries";
 import { buildLotViews, type LotView } from "@/lib/listing-view";
 
@@ -16,7 +17,6 @@ type PreviewLot = Pick<
   | "quantity"
   | "unit"
   | "expiryLabel"
-  | "imminent"
   | "priceLabel"
   | "hasMsds"
   | "hasCoa"
@@ -32,7 +32,6 @@ const sampleLots: PreviewLot[] = [
     quantity: 25,
     unit: "kg",
     expiryLabel: "2026.09",
-    imminent: true,
     priceLabel: "₩8,000 / kg",
     hasMsds: true,
     hasCoa: true,
@@ -46,7 +45,6 @@ const sampleLots: PreviewLot[] = [
     quantity: 5,
     unit: "kg",
     expiryLabel: "2026.07",
-    imminent: true,
     priceLabel: "협의",
     hasMsds: true,
     hasCoa: false,
@@ -60,7 +58,6 @@ const sampleLots: PreviewLot[] = [
     quantity: 12,
     unit: "kg",
     expiryLabel: "2027.01",
-    imminent: false,
     priceLabel: "₩20,000 / kg",
     hasMsds: true,
     hasCoa: true,
@@ -74,7 +71,6 @@ const sampleLots: PreviewLot[] = [
     quantity: 1,
     unit: "kg",
     expiryLabel: "2026.12",
-    imminent: false,
     priceLabel: "₩90,000 / kg",
     hasMsds: true,
     hasCoa: true,
@@ -88,9 +84,6 @@ function FeaturedMaterial({ item }: { item: PreviewLot }) {
   return (
     <Link href={item.id.startsWith("sample-") ? "/listings" : `/listings/${item.id}`} className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-card transition hover:-translate-y-0.5 hover:border-ink/25">
       <div className="p-6">
-        {item.imminent ? (
-          <span className="mb-3 inline-block rounded-full bg-signal px-3 py-1 text-[11px] font-semibold tracking-wide text-white">마감임박</span>
-        ) : null}
         <div className="flex items-start justify-between gap-5">
           <div>
             <h3 className="text-[22px] font-semibold tracking-tight text-ink">{item.title}</h3>
@@ -103,7 +96,7 @@ function FeaturedMaterial({ item }: { item: PreviewLot }) {
         <dl className="mt-6 grid grid-cols-2 gap-0 border-t border-line-soft pt-5 sm:grid-cols-4">
           {[
             ["수량", `${item.quantity} ${item.unit}`, false],
-            ["유효기한", item.expiryLabel, item.imminent],
+            ["유효기한", item.expiryLabel, false],
             ["서류", docs, false],
             ["보관", item.storageText, false],
           ].map(([label, value, signal]) => (
@@ -130,7 +123,7 @@ function CompactMaterialRow({ item }: { item: PreviewLot }) {
       </div>
       <div className="ml-auto shrink-0 text-right">
         <div className="text-sm font-semibold text-ink">{item.priceLabel}</div>
-        <div className={`mt-1 text-[11px] ${item.imminent ? "text-signal" : "text-sub"}`}>
+        <div className="mt-1 text-[11px] text-sub">
           {item.expiryLabel}
         </div>
       </div>
@@ -175,6 +168,9 @@ export default async function Home() {
 
       <section className="bg-bg py-[72px]">
         <div className="mx-auto w-full max-w-[1180px] px-5 sm:px-8">
+          <div className="mb-8">
+            <TradeNotice />
+          </div>
           <ScrollReveal>
             <SectionHead label="Recent Lots" title="최근 등록 원료" href="/listings" linkText="더 많은 원료 검색하기" />
             {isDemo ? (

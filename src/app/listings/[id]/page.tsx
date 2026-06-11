@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { ContactGate } from "@/components/contact-gate";
 import { StatusBanner } from "@/components/status-banner";
+import { TradeNotice } from "@/components/trade-notice";
 import {
   formatExpiry,
   formatNumber,
@@ -112,7 +113,6 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
                 {expiry.label} <span className="text-sm font-medium text-sub">{expiry.helper}</span>
               </InfoItem>
               <InfoItem label="가격">{formatPrice(listing.price, listing.price_negotiable)}</InfoItem>
-              <InfoItem label="할인율">{listing.discount_rate ?? "-"}%</InfoItem>
               <InfoItem label="공급처/제조원">{listing.supplier} / {listing.manufacturer}</InfoItem>
               <InfoItem label="지역">{listing.region ?? "-"}</InfoItem>
               <InfoItem label="개봉여부">{openedLabel(listing.opened_status)}</InfoItem>
@@ -157,9 +157,10 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           <div className="rounded-2xl border border-line bg-card p-6">
             <h2 className="text-xl font-semibold tracking-tight text-ink">연락처</h2>
             <div className="mt-4">
-              <ContactGate contact={detail.contact} listingId={listing.id} />
+              <ContactGate contact={detail.contact} listingId={listing.id} lock={detail.contactLock} />
             </div>
           </div>
+          <TradeNotice />
 
           <div className="rounded-2xl border border-line bg-card p-6">
             <h2 className="text-xl font-semibold tracking-tight text-ink">서류</h2>

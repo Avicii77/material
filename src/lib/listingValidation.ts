@@ -141,7 +141,7 @@ export function parseListingForm(
   const unit = text(formData, "unit") || "kg";
   const expiryDate = text(formData, "expiry_date");
   const priceNegotiable = checked(formData, "price_negotiable");
-  const price = priceNegotiable ? null : optionalNumber(formData, "price");
+  const price = optionalNumber(formData, "price");
   const discountRate = optionalNumber(formData, "discount_rate");
   const openedStatus = nullableText(formData, "opened_status");
   const storageCondition = nullableText(formData, "storage_condition");
@@ -164,7 +164,9 @@ export function parseListingForm(
   if (!expiryDate || Number.isNaN(new Date(`${expiryDate}T00:00:00`).getTime())) {
     errors.push("유효한 유효기한을 입력해 주세요.");
   }
-  if (!priceNegotiable && (price === null || Number.isNaN(price) || price < 0)) {
+  if (price !== null && (Number.isNaN(price) || price < 0)) {
+    errors.push("가격은 0 이상이어야 합니다.");
+  } else if (!priceNegotiable && price === null) {
     errors.push("가격을 입력하거나 협의를 선택해 주세요.");
   }
   if (

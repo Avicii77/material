@@ -30,10 +30,12 @@ export async function POST(request: NextRequest) {
   }
 
   const formData = await request.formData();
+  const contactName = text(formData, "contact_name");
+  const displayName = text(formData, "display_name");
   const { error } = await supabase.from("profiles").upsert({
     id: user.id,
-    display_name: text(formData, "display_name"),
-    contact_name: text(formData, "contact_name"),
+    display_name: contactName ?? displayName,
+    contact_name: contactName,
     company_name: text(formData, "company_name"),
     phone: text(formData, "phone"),
     contact_email: text(formData, "contact_email"),

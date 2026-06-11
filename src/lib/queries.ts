@@ -59,6 +59,8 @@ export type ListingContact = {
   contact_email: string | null;
 };
 
+export type ContactLock = "login" | "profile" | null;
+
 export type Profile = {
   id: string;
   display_name: string | null;
@@ -291,7 +293,13 @@ export async function getListings(
 
 export async function getListingDetail(id: string) {
   if (!isSupabaseConfigured()) {
-    return { listing: null, user: null, contact: null, configMissing: true };
+    return {
+      listing: null,
+      user: null,
+      contact: null,
+      contactLock: null,
+      configMissing: true,
+    };
   }
 
   const supabase = await createClient();
@@ -307,14 +315,36 @@ export async function getListingDetail(id: string) {
       listing: null,
       user,
       contact: null,
+      contactLock: null,
       error: error?.message ?? "등록물을 찾을 수 없습니다.",
     };
   }
 
   const listing = data as Listing;
-  const contactAllowed = can(user, "view_contact", listing);
+  let profileComplete = false;
   let contact: ListingContact | null = null;
   const privilegedClient = hasServiceRoleKey() ? createServiceClient() : supabase;
+
+  if (user) {
+    const { data: viewerProfile } = await supabase
+      .from("profiles")
+      .select("contact_name, company_name, phone, contact_email")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    profileComplete = Boolean(
+      viewerProfile?.contact_name &&
+        viewerProfile.company_name &&
+        (viewerProfile.phone || viewerProfile.contact_email),
+    );
+  }
+
+  const contactLock: ContactLock = !user
+    ? "login"
+    : profileComplete
+      ? null
+      : "profile";
+  const contactAllowed = can(user, "view_contact", listing) && profileComplete;
 
   if (contactAllowed) {
     const { data: profile } = await privilegedClient
@@ -362,7 +392,7 @@ export async function getListingDetail(id: string) {
     );
   }
 
-  return { listing, user, contact, configMissing: false };
+  return { listing, user, contact, contactLock, configMissing: false };
 }
 
 export async function getImageUrl(storagePath?: string | null) {

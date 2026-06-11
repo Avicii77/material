@@ -36,11 +36,13 @@ export function formatPrice(
   price?: number | null,
   priceNegotiable?: boolean | null,
 ) {
+  const hasPrice = price !== null && price !== undefined && !Number.isNaN(price);
+
   if (priceNegotiable) {
-    return "협의";
+    return hasPrice ? `협의 (희망 ${formatNumber(price)}원)` : "협의";
   }
 
-  if (price === null || price === undefined || Number.isNaN(price)) {
+  if (!hasPrice) {
     return "-";
   }
 

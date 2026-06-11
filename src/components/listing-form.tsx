@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import type { Listing } from "@/lib/queries";
 import { CERTS, FUNCTIONS, TYPES } from "@/lib/taxonomy";
 import {
@@ -18,7 +17,7 @@ type ListingFormProps = {
 const field = "rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm outline-none focus:border-accent";
 
 export function ListingForm({ action, listing }: ListingFormProps) {
-  const [negotiable, setNegotiable] = useState(Boolean(listing?.price_negotiable));
+  const negotiable = Boolean(listing?.price_negotiable);
   const isEdit = Boolean(listing);
 
   return (
@@ -200,46 +199,40 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             type="number"
             min="0"
             name="price"
-            disabled={negotiable}
             defaultValue={listing?.price ?? ""}
-            className={`${field} disabled:bg-surface`}
-          />
-        </label>
-        <label className="mt-7 inline-flex items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            name="price_negotiable"
-            defaultChecked={negotiable}
-            onChange={(event) => setNegotiable(event.target.checked)}
-          />
-          <span>협의</span>
-        </label>
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium">할인율(%)</span>
-          <input
-            type="number"
-            min="0"
-            max="100"
-            name="discount_rate"
-            defaultValue={listing?.discount_rate ?? ""}
             className={field}
           />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium">상태 *</span>
-          <select
-            name="status"
-            required
-            defaultValue={listing?.status ?? "available"}
-            className={field}
-          >
-            {LISTING_STATUSES.map((status) => (
-              <option key={status.value} value={status.value}>
-                {status.label}
-              </option>
-            ))}
-          </select>
+        <label className="mt-7 flex flex-col gap-1 text-sm">
+          <span className="inline-flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="price_negotiable"
+              defaultChecked={negotiable}
+            />
+            <span>협의</span>
+          </span>
+          <span className="text-xs text-sub">협의여도 희망가를 입력할 수 있어요</span>
         </label>
+        {isEdit ? (
+          <label className="flex flex-col gap-1 text-sm">
+            <span className="font-medium">상태 *</span>
+            <select
+              name="status"
+              required
+              defaultValue={listing?.status ?? "available"}
+              className={field}
+            >
+              {LISTING_STATUSES.map((status) => (
+                <option key={status.value} value={status.value}>
+                  {status.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : (
+          <input type="hidden" name="status" value="available" />
+        )}
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">

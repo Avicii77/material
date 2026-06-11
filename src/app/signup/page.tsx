@@ -23,7 +23,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
       {error ? <StatusBanner type="error">{error}</StatusBanner> : null}
       <form action={signUpWithEmail} className="space-y-4 rounded-2xl border border-line bg-card p-6">
         <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-ink">표시명</span>
+          <span className="font-semibold text-ink">이름</span>
           <input
             name="display_name"
             className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"

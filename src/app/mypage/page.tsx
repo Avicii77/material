@@ -61,15 +61,7 @@ export default async function MyPage({ searchParams }: MyPageProps) {
         </p>
         <form action="/api/profile" method="post" className="mt-5 grid gap-4 md:grid-cols-2">
           <label className="flex flex-col gap-1 text-sm">
-            <span className="font-medium">표시명</span>
-            <input
-              name="display_name"
-              defaultValue={data.profile?.display_name ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm">
-            <span className="font-medium">담당자 이름</span>
+            <span className="font-medium">이름</span>
             <input
               name="contact_name"
               defaultValue={data.profile?.contact_name ?? ""}
@@ -78,8 +70,10 @@ export default async function MyPage({ searchParams }: MyPageProps) {
           </label>
           <label className="flex flex-col gap-1 text-sm">
             <span className="font-medium">회사명</span>
+            <span className="text-xs text-sub">🔒 비공개 · 다른 사람에게 보이지 않습니다</span>
             <input
               name="company_name"
+              required
               defaultValue={data.profile?.company_name ?? ""}
               className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
