@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Badge } from "@/components/badge";
+import { ContactGate } from "@/components/contact-gate";
 import { StatusBanner } from "@/components/status-banner";
 import {
   formatExpiry,
@@ -27,8 +29,8 @@ function InfoItem({
 }) {
   return (
     <div className="border-b border-line pb-3">
-      <dt className="text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500">{label}</dt>
-      <dd className="mt-1 font-semibold text-slate-900">{children}</dd>
+      <dt className="text-[11px] font-bold uppercase tracking-[0.08em] text-sub">{label}</dt>
+      <dd className="mt-1 font-semibold text-ink">{children}</dd>
     </div>
   );
 }
@@ -62,16 +64,16 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
     <main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
       <div className="flex flex-col gap-4 border-b border-line pb-6 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <div className="text-sm font-bold text-accent">{listing.type_category}</div>
-          <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-slate-950">{listing.title}</h1>
-          <p className="mt-2 text-slate-600">{listing.inci_name} · {listing.cas_no}</p>
+          <div className="font-lat text-xs uppercase tracking-[0.2em] text-sub">{listing.type_category}</div>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-ink">{listing.title}</h1>
+          <p className="mt-2 text-sub">{listing.inci_name} · {listing.cas_no}</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <span className="rounded-full bg-accent-soft px-3 py-1 text-sm font-bold text-accent-strong">{statusLabel(listing.status)}</span>
+          <Badge tone={listing.status === "available" ? "neutral" : "muted"}>{statusLabel(listing.status)}</Badge>
           {ownerCanEdit ? (
             <Link
               href={`/listings/${listing.id}/edit`}
-              className="rounded-sm border border-line px-3 py-2 text-sm font-bold hover:bg-surface-muted"
+              className="rounded-lg border border-line px-4 py-2.5 text-sm font-semibold text-ink hover:bg-surface"
             >
               수정
             </Link>
@@ -84,30 +86,30 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           <div className="grid gap-3 sm:grid-cols-2">
             {images.length > 0 ? (
               images.map((image) => (
-                <div key={image.id} className="aspect-[4/3] overflow-hidden border border-line bg-slate-100">
+                <div key={image.id} className="aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface">
                   {image.url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={image.url} alt={listing.title} className="h-full w-full object-cover" />
                   ) : (
-                    <div className="flex h-full items-center justify-center text-sm text-slate-500">
+                    <div className="flex h-full items-center justify-center text-sm text-sub">
                       이미지 URL 없음
                     </div>
                   )}
                 </div>
               ))
             ) : (
-              <div className="border border-dashed border-line bg-white p-8 text-sm text-slate-500">
+              <div className="rounded-2xl border border-dashed border-line bg-white p-8 text-sm text-sub">
                 등록된 사진이 없습니다.
               </div>
             )}
           </div>
 
-          <div className="border border-line bg-white p-5">
-            <h2 className="text-xl font-extrabold tracking-tight">전체 정보</h2>
+          <div className="rounded-2xl border border-line bg-white p-6">
+            <h2 className="text-xl font-semibold tracking-tight text-ink">전체 정보</h2>
             <dl className="mt-5 grid gap-4 sm:grid-cols-2">
               <InfoItem label="수량">{formatNumber(listing.quantity)} {listing.unit}</InfoItem>
               <InfoItem label="유효기한">
-                {expiry.label} <span className="text-sm font-medium text-slate-500">{expiry.helper}</span>
+                {expiry.label} <span className="text-sm font-medium text-sub">{expiry.helper}</span>
               </InfoItem>
               <InfoItem label="가격">{formatPrice(listing.price, listing.price_negotiable)}</InfoItem>
               <InfoItem label="할인율">{listing.discount_rate ?? "-"}%</InfoItem>
@@ -119,36 +121,32 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
               <InfoItem label="서류">MSDS {listing.has_msds ? "있음" : "없음"} · COA {listing.has_coa ? "있음" : "없음"}</InfoItem>
             </dl>
             <div className="mt-5">
-              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500">기능</div>
+              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-sub">기능</div>
               <div className="mt-2 flex flex-wrap gap-2">
                 {(listing.function_tags ?? []).length > 0 ? (
                   listing.function_tags?.map((tag) => (
-                    <span key={tag} className="rounded-full bg-accent-soft px-3 py-1 text-xs font-bold text-accent-strong">
-                      {tag}
-                    </span>
+                    <Badge key={tag}>{tag}</Badge>
                   ))
                 ) : (
-                  <span className="text-sm text-slate-500">-</span>
+                  <span className="text-sm text-sub">-</span>
                 )}
               </div>
             </div>
             <div className="mt-5">
-              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500">인증서</div>
+              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-sub">인증서</div>
               <div className="mt-2 flex flex-wrap gap-2">
                 {(listing.cert_tags ?? []).length > 0 ? (
                   listing.cert_tags?.map((tag) => (
-                    <span key={tag} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">
-                      {tag}
-                    </span>
+                    <Badge key={tag} tone="muted">{tag}</Badge>
                   ))
                 ) : (
-                  <span className="text-sm text-slate-500">-</span>
+                  <span className="text-sm text-sub">-</span>
                 )}
               </div>
             </div>
             <div className="mt-5">
-              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500">기타사항</div>
-              <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-slate-700">
+              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-sub">기타사항</div>
+              <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-ink">
                 {listing.notes ?? "-"}
               </p>
             </div>
@@ -156,42 +154,15 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
         </div>
 
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <div className="border border-line bg-white p-5 shadow-[0_18px_60px_rgba(16,70,50,0.06)]">
-            <h2 className="text-xl font-extrabold tracking-tight">연락처</h2>
-            {detail.contact ? (
-              <dl className="mt-4 space-y-3 text-sm">
-                <div>
-                  <dt className="text-xs text-slate-500">담당자</dt>
-                  <dd>{detail.contact.contact_name ?? "-"}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-slate-500">회사명</dt>
-                  <dd>{detail.contact.company_name ?? "-"}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-slate-500">전화</dt>
-                  <dd>{detail.contact.phone ?? "-"}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-slate-500">이메일</dt>
-                  <dd>{detail.contact.contact_email ?? "-"}</dd>
-                </div>
-              </dl>
-            ) : (
-              <div className="mt-4 space-y-3">
-                <p className="text-sm text-slate-600">로그인 후 연락처를 볼 수 있습니다.</p>
-                <Link
-                  href={`/login?next=/listings/${listing.id}`}
-                  className="inline-block rounded-sm bg-accent-strong px-4 py-2 text-sm font-bold text-white hover:bg-accent"
-                >
-                  로그인
-                </Link>
-              </div>
-            )}
+          <div className="rounded-2xl border border-line bg-white p-6">
+            <h2 className="text-xl font-semibold tracking-tight text-ink">연락처</h2>
+            <div className="mt-4">
+              <ContactGate contact={detail.contact} listingId={listing.id} />
+            </div>
           </div>
 
-          <div className="border border-line bg-white p-5">
-            <h2 className="text-xl font-extrabold tracking-tight">서류</h2>
+          <div className="rounded-2xl border border-line bg-white p-6">
+            <h2 className="text-xl font-semibold tracking-tight text-ink">서류</h2>
             <div className="mt-4 space-y-2 text-sm">
               {(listing.listing_docs ?? []).length > 0 ? (
                 listing.listing_docs?.map((doc) =>
@@ -199,47 +170,47 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
                     <a
                       key={doc.id}
                       href={doc.signed_url}
-                      className="block rounded-sm border border-line px-3 py-2 font-bold hover:bg-surface-muted"
+                      className="block rounded-lg border border-ink px-3 py-2 font-bold text-ink hover:bg-surface"
                     >
                       {doc.doc_type.toUpperCase()} 다운로드
                     </a>
                   ) : (
-                    <div key={doc.id} className="rounded-sm bg-slate-50 px-3 py-2 text-slate-500">
+                    <div key={doc.id} className="rounded-lg bg-surface px-3 py-2 text-sub">
                       {doc.doc_type.toUpperCase()} · 로그인 후 다운로드
                     </div>
                   ),
                 )
               ) : (
-                <p className="text-slate-500">첨부 서류가 없습니다.</p>
+                <p className="text-sub">첨부 서류가 없습니다.</p>
               )}
             </div>
           </div>
 
           {detail.user ? (
-            <form action="/api/bookmarks" method="post" className="border border-line bg-white p-5">
+            <form action="/api/bookmarks" method="post" className="rounded-2xl border border-line bg-white p-6">
               <input type="hidden" name="listing_id" value={listing.id} />
-              <button className="w-full rounded-sm border border-accent-strong px-4 py-2 text-sm font-bold text-accent-strong hover:bg-accent-soft">
+              <button className="w-full rounded-lg border border-ink px-4 py-2 text-sm font-bold text-ink hover:bg-surface">
                 찜 토글
               </button>
             </form>
           ) : null}
 
           {ownerCanEdit ? (
-            <div className="border border-line bg-white p-5">
-              <h2 className="text-xl font-extrabold tracking-tight">소유자 작업</h2>
+            <div className="rounded-2xl border border-line bg-white p-6">
+              <h2 className="text-xl font-semibold tracking-tight text-ink">소유자 작업</h2>
               <div className="mt-4 grid gap-2">
                 {["available", "reserved", "completed"].map((status) => (
                   <form key={status} action={`/api/listings/${listing.id}`} method="post">
                     <input type="hidden" name="intent" value="status" />
                     <input type="hidden" name="status" value={status} />
-                    <button className="w-full rounded-sm border border-line px-3 py-2 text-sm font-bold hover:bg-surface-muted">
+                    <button className="w-full rounded-lg border border-line px-3 py-2 text-sm font-bold hover:bg-surface">
                       {statusLabel(status)}로 변경
                     </button>
                   </form>
                 ))}
                 <form action={`/api/listings/${listing.id}`} method="post">
                   <input type="hidden" name="intent" value="delete" />
-                  <button className="w-full rounded-sm border border-red-300 px-3 py-2 text-sm font-bold text-red-700 hover:bg-red-50">
+                  <button className="w-full rounded-lg border border-signal/40 px-3 py-2 text-sm font-bold text-signal hover:bg-signal/5">
                     삭제
                   </button>
                 </form>

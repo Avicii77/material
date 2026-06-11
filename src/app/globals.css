@@ -1,31 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f7f3;
-  --foreground: #132018;
-  --surface: #ffffff;
-  --surface-muted: #eef4ec;
-  --line: #d8e2d5;
-  --accent: #1d6b4b;
-  --accent-strong: #104632;
-  --accent-soft: #dceee5;
+  --bg: #ffffff;
+  --surface: #f7f8f9;
+  --ink: #14171a;
+  --sub: #6b7280;
+  --line: #e8eaed;
+  --line-soft: #f0f1f3;
+  --signal: #c0492e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--ink);
+  --color-sub: var(--sub);
   --color-line: var(--line);
-  --color-accent: var(--accent);
-  --color-accent-strong: var(--accent-strong);
-  --color-accent-soft: var(--accent-soft);
+  --color-line-soft: var(--line-soft);
+  --color-signal: var(--signal);
+
+  /* 신토큰 별칭 (페이지가 쓰는 기존 이름 유지용) */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-surface-muted: var(--surface);
+
+  /* 레거시 accent → 무채색 재매핑 (미마이그레이션 페이지 graceful degrade) */
+  --color-accent: var(--ink);
+  --color-accent-strong: var(--ink);
+  --color-accent-soft: var(--surface);
+
+  --font-lat: var(--font-inter-tight);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans-kr), Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans-kr), var(--font-inter-tight), Arial, Helvetica, sans-serif;
 }
 
 button,
@@ -42,5 +52,5 @@ textarea {
 }
 
 ::selection {
-  background: var(--accent-soft);
+  background: #e9edf0;
 }

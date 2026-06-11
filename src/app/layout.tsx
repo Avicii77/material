@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import { Noto_Sans_KR, Inter_Tight } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans-kr",
+  display: "swap",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter-tight",
   display: "swap",
 });
 
@@ -22,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${notoSansKr.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-background text-foreground antialiased">
+    <html lang="ko" className={`${notoSansKr.variable} ${interTight.variable} h-full`}>
+      <body className="flex min-h-full flex-col bg-bg text-ink antialiased">
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />

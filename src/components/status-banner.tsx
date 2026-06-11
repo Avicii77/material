@@ -6,13 +6,13 @@ type StatusBannerProps = {
 export function StatusBanner({ type = "info", children }: StatusBannerProps) {
   const className =
     type === "error"
-      ? "border-red-200 bg-red-50 text-red-800"
+      ? "border-signal/30 bg-signal/5 text-signal"
       : type === "success"
-        ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-        : "border-amber-200 bg-[#f7efd9] text-amber-900";
+        ? "border-line bg-surface text-ink"
+        : "border-line bg-surface text-sub";
 
   return (
-    <div className={`rounded-sm border px-4 py-3 text-sm font-medium ${className}`}>
+    <div className={`rounded-xl border px-4 py-3 text-sm font-medium ${className}`}>
       {children}
     </div>
   );

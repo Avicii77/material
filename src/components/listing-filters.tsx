@@ -26,7 +26,7 @@ function FieldLabel({
 }) {
   return (
     <label className="flex flex-col gap-1.5 text-sm">
-      <span className="font-bold text-slate-700">{label}</span>
+      <span className="font-semibold text-ink">{label}</span>
       {children}
     </label>
   );
@@ -45,19 +45,19 @@ function CheckGrid({
 }) {
   return (
     <fieldset className="space-y-3">
-      <legend className="text-sm font-bold text-slate-700">{title}</legend>
-      <div className="grid max-h-52 gap-2 overflow-y-auto border border-line bg-white p-2 sm:grid-cols-2 lg:grid-cols-3">
+      <legend className="text-sm font-semibold text-ink">{title}</legend>
+      <div className="grid max-h-52 gap-2 overflow-y-auto rounded-lg border border-line bg-white p-2 sm:grid-cols-2 lg:grid-cols-3">
         {options.map((option) => (
           <label
             key={option}
-            className="flex min-h-9 items-center gap-2 rounded-sm px-2 text-sm text-slate-700 hover:bg-surface-muted"
+            className="flex min-h-9 items-center gap-2 rounded-lg px-2 text-sm text-ink hover:bg-surface"
           >
             <input
               type="checkbox"
               name={name}
               value={option}
               defaultChecked={selected.includes(option)}
-              className="size-4 accent-[var(--accent)]"
+              className="size-4 accent-[var(--ink)]"
             />
             <span>{option}</span>
           </label>
@@ -67,14 +67,14 @@ function CheckGrid({
   );
 }
 
-const inputClass = "rounded-sm border border-line px-3 py-2.5 outline-none focus:border-accent";
+const inputClass = "rounded-lg border border-line px-3.5 py-2.5 text-sm outline-none focus:border-ink";
 
 export function ListingFilters({ searchParams }: { searchParams: SearchParams }) {
   const selectedFunctions = values(searchParams, "func");
   const selectedCerts = values(searchParams, "cert");
 
   return (
-    <form action="/listings" className="border border-line bg-white p-4 shadow-[0_18px_60px_rgba(16,70,50,0.05)]">
+    <form action="/listings" className="rounded-2xl border border-line bg-white p-5">
       <div className="flex flex-col gap-3 border-b border-line pb-4 lg:flex-row lg:items-end">
         <div className="grid flex-1 gap-3 md:grid-cols-4">
           <FieldLabel label="키워드">
@@ -123,139 +123,144 @@ export function ListingFilters({ searchParams }: { searchParams: SearchParams })
           </FieldLabel>
         </div>
         <div className="flex gap-2">
-          <Link className="inline-flex items-center rounded-sm border border-line px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-surface-muted" href="/listings">
+          <Link className="inline-flex items-center rounded-lg border border-line px-4 py-2.5 text-sm font-semibold text-ink hover:bg-surface" href="/listings">
             초기화
           </Link>
-          <button className="rounded-sm bg-accent-strong px-5 py-2.5 text-sm font-bold text-white hover:bg-accent">
+          <button className="rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90">
             검색
           </button>
         </div>
       </div>
 
-      <div className="grid gap-5 pt-4 xl:grid-cols-[1.15fr_0.85fr]">
-        <div className="grid gap-4">
-          <CheckGrid
-            title="기능"
-            name="func"
-            options={FUNCTIONS}
-            selected={selectedFunctions}
-          />
-          <CheckGrid
-            title="인증서"
-            name="cert"
-            options={CERTS}
-            selected={selectedCerts}
-          />
-        </div>
-
-        <div className="grid gap-4">
-          <div className="grid gap-3 md:grid-cols-2">
-            <FieldLabel label="유효기한 시작">
-              <input
-                type="date"
-                name="expiryAfter"
-                defaultValue={value(searchParams, "expiryAfter")}
-                className={inputClass}
-              />
-            </FieldLabel>
-            <FieldLabel label="유효기한 종료">
-              <input
-                type="date"
-                name="expiryBefore"
-                defaultValue={value(searchParams, "expiryBefore")}
-                className={inputClass}
-              />
-            </FieldLabel>
-            <FieldLabel label="개봉여부">
-              <select name="opened" defaultValue={value(searchParams, "opened")} className={inputClass}>
-                <option value="">전체</option>
-                {OPENED_STATUSES.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </FieldLabel>
-            <FieldLabel label="보관상태">
-              <select name="storage" defaultValue={value(searchParams, "storage")} className={inputClass}>
-                <option value="">전체</option>
-                {STORAGE_CONDITIONS.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </FieldLabel>
-          </div>
-
-          <div className="grid gap-3 md:grid-cols-2">
-            <FieldLabel label="수량 최소">
-              <input type="number" step="0.01" name="qtyMin" defaultValue={value(searchParams, "qtyMin")} className={inputClass} />
-            </FieldLabel>
-            <FieldLabel label="수량 최대">
-              <input type="number" step="0.01" name="qtyMax" defaultValue={value(searchParams, "qtyMax")} className={inputClass} />
-            </FieldLabel>
-            <FieldLabel label="가격 최소">
-              <input type="number" name="priceMin" defaultValue={value(searchParams, "priceMin")} className={inputClass} />
-            </FieldLabel>
-            <FieldLabel label="가격 최대">
-              <input type="number" name="priceMax" defaultValue={value(searchParams, "priceMax")} className={inputClass} />
-            </FieldLabel>
-          </div>
-
-          <FieldLabel label="지역">
-            <input
-              name="region"
-              defaultValue={value(searchParams, "region")}
-              className={inputClass}
-              placeholder="예: 경기, 서울, 부산"
+      <details className="group pt-4">
+        <summary className="cursor-pointer list-none text-sm font-semibold text-ink">
+          <span className="inline-flex items-center gap-1">상세 필터 <span className="text-sub transition-transform group-open:rotate-180">▾</span></span>
+        </summary>
+        <div className="grid gap-5 pt-4 xl:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid gap-4">
+            <CheckGrid
+              title="기능"
+              name="func"
+              options={FUNCTIONS}
+              selected={selectedFunctions}
             />
-          </FieldLabel>
+            <CheckGrid
+              title="인증서"
+              name="cert"
+              options={CERTS}
+              selected={selectedCerts}
+            />
+          </div>
 
-          <div className="flex flex-wrap gap-4 border-t border-line pt-4 text-sm font-medium text-slate-700">
-            <label className="inline-flex items-center gap-2">
+          <div className="grid gap-4">
+            <div className="grid gap-3 md:grid-cols-2">
+              <FieldLabel label="유효기한 시작">
+                <input
+                  type="date"
+                  name="expiryAfter"
+                  defaultValue={value(searchParams, "expiryAfter")}
+                  className={inputClass}
+                />
+              </FieldLabel>
+              <FieldLabel label="유효기한 종료">
+                <input
+                  type="date"
+                  name="expiryBefore"
+                  defaultValue={value(searchParams, "expiryBefore")}
+                  className={inputClass}
+                />
+              </FieldLabel>
+              <FieldLabel label="개봉여부">
+                <select name="opened" defaultValue={value(searchParams, "opened")} className={inputClass}>
+                  <option value="">전체</option>
+                  {OPENED_STATUSES.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </FieldLabel>
+              <FieldLabel label="보관상태">
+                <select name="storage" defaultValue={value(searchParams, "storage")} className={inputClass}>
+                  <option value="">전체</option>
+                  {STORAGE_CONDITIONS.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </FieldLabel>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-2">
+              <FieldLabel label="수량 최소">
+                <input type="number" step="0.01" name="qtyMin" defaultValue={value(searchParams, "qtyMin")} className={inputClass} />
+              </FieldLabel>
+              <FieldLabel label="수량 최대">
+                <input type="number" step="0.01" name="qtyMax" defaultValue={value(searchParams, "qtyMax")} className={inputClass} />
+              </FieldLabel>
+              <FieldLabel label="가격 최소">
+                <input type="number" name="priceMin" defaultValue={value(searchParams, "priceMin")} className={inputClass} />
+              </FieldLabel>
+              <FieldLabel label="가격 최대">
+                <input type="number" name="priceMax" defaultValue={value(searchParams, "priceMax")} className={inputClass} />
+              </FieldLabel>
+            </div>
+
+            <FieldLabel label="지역">
               <input
-                type="checkbox"
-                name="hasMsds"
-                value="1"
-                defaultChecked={value(searchParams, "hasMsds") === "1"}
-                className="size-4 accent-[var(--accent)]"
+                name="region"
+                defaultValue={value(searchParams, "region")}
+                className={inputClass}
+                placeholder="예: 경기, 서울, 부산"
               />
-              <span>MSDS 있음</span>
-            </label>
-            <label className="inline-flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="hasCoa"
-                value="1"
-                defaultChecked={value(searchParams, "hasCoa") === "1"}
-                className="size-4 accent-[var(--accent)]"
-              />
-              <span>COA 있음</span>
-            </label>
-            <label className="inline-flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="negotiableOnly"
-                value="1"
-                defaultChecked={value(searchParams, "negotiableOnly") === "1"}
-                className="size-4 accent-[var(--accent)]"
-              />
-              <span>협의만</span>
-            </label>
-            <label className="inline-flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="excludeExpired"
-                value="1"
-                defaultChecked={value(searchParams, "excludeExpired") === "1"}
-                className="size-4 accent-[var(--accent)]"
-              />
-              <span>과거 유효기한 제외</span>
-            </label>
+            </FieldLabel>
+
+            <div className="flex flex-wrap gap-4 border-t border-line pt-4 text-sm font-medium text-ink">
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="hasMsds"
+                  value="1"
+                  defaultChecked={value(searchParams, "hasMsds") === "1"}
+                  className="size-4 accent-[var(--ink)]"
+                />
+                <span>MSDS 있음</span>
+              </label>
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="hasCoa"
+                  value="1"
+                  defaultChecked={value(searchParams, "hasCoa") === "1"}
+                  className="size-4 accent-[var(--ink)]"
+                />
+                <span>COA 있음</span>
+              </label>
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="negotiableOnly"
+                  value="1"
+                  defaultChecked={value(searchParams, "negotiableOnly") === "1"}
+                  className="size-4 accent-[var(--ink)]"
+                />
+                <span>협의만</span>
+              </label>
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="excludeExpired"
+                  value="1"
+                  defaultChecked={value(searchParams, "excludeExpired") === "1"}
+                  className="size-4 accent-[var(--ink)]"
+                />
+                <span>과거 유효기한 제외</span>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
+      </details>
     </form>
   );
 }

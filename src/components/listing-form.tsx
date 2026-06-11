@@ -15,6 +15,8 @@ type ListingFormProps = {
   listing?: Listing | null;
 };
 
+const field = "rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm outline-none focus:border-ink";
+
 export function ListingForm({ action, listing }: ListingFormProps) {
   const [negotiable, setNegotiable] = useState(Boolean(listing?.price_negotiable));
   const isEdit = Boolean(listing);
@@ -24,15 +26,15 @@ export function ListingForm({ action, listing }: ListingFormProps) {
       action={action}
       method="post"
       encType="multipart/form-data"
-      className="space-y-7 border border-line bg-white p-5 shadow-[0_18px_60px_rgba(16,70,50,0.05)]"
+      className="space-y-7 rounded-2xl border border-line bg-white p-6"
     >
       <input type="hidden" name="intent" value="save" />
 
       <div className="border-b border-line pb-4">
-        <h2 className="text-xl font-extrabold tracking-tight text-slate-950">
+        <h2 className="text-xl font-semibold tracking-tight text-ink">
           기본 원료 정보
         </h2>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-sub">
           검색과 상세 판단에 바로 쓰이는 필수 정보입니다.
         </p>
       </div>
@@ -44,7 +46,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="title"
             required
             defaultValue={listing?.title ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -53,7 +55,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="inci_name"
             required
             defaultValue={listing?.inci_name ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -62,7 +64,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="cas_no"
             required
             defaultValue={listing?.cas_no ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -71,7 +73,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="manufacturer"
             required
             defaultValue={listing?.manufacturer ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -80,7 +82,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="supplier"
             required
             defaultValue={listing?.supplier ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -89,7 +91,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="type_category"
             required
             defaultValue={listing?.type_category ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           >
             <option value="">선택</option>
             {TYPES.map((type) => (
@@ -102,10 +104,10 @@ export function ListingForm({ action, listing }: ListingFormProps) {
       </div>
 
       <div className="border-b border-line pb-4 pt-2">
-        <h2 className="text-xl font-extrabold tracking-tight text-slate-950">
+        <h2 className="text-xl font-semibold tracking-tight text-ink">
           분류와 거래 조건
         </h2>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-sub">
           COOS 필터, 수량, 가격, 상태 정보로 구매자가 빠르게 비교합니다.
         </p>
       </div>
@@ -117,7 +119,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="function_tags"
             multiple
             defaultValue={listing?.function_tags ?? []}
-            className="min-h-48 rounded-md border border-slate-300 px-3 py-2"
+            className={`${field} min-h-48`}
           >
             {FUNCTIONS.map((item) => (
               <option key={item} value={item}>
@@ -132,7 +134,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="cert_tags"
             multiple
             defaultValue={listing?.cert_tags ?? []}
-            className="min-h-48 rounded-md border border-slate-300 px-3 py-2"
+            className={`${field} min-h-48`}
           >
             {CERTS.map((item) => (
               <option key={item} value={item}>
@@ -153,7 +155,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="quantity"
             required
             defaultValue={listing?.quantity ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -162,7 +164,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="unit"
             required
             defaultValue={listing?.unit ?? "kg"}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           >
             {UNITS.map((unit) => (
               <option key={unit} value={unit}>
@@ -178,7 +180,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="expiry_date"
             required
             defaultValue={listing?.expiry_date ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -186,7 +188,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
           <input
             name="region"
             defaultValue={listing?.region ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
       </div>
@@ -200,7 +202,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="price"
             disabled={negotiable}
             defaultValue={listing?.price ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2 disabled:bg-slate-100"
+            className={`${field} disabled:bg-surface`}
           />
         </label>
         <label className="mt-7 inline-flex items-center gap-2 text-sm">
@@ -220,7 +222,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             max="100"
             name="discount_rate"
             defaultValue={listing?.discount_rate ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -229,7 +231,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="status"
             required
             defaultValue={listing?.status ?? "available"}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           >
             {LISTING_STATUSES.map((status) => (
               <option key={status.value} value={status.value}>
@@ -260,7 +262,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
           <select
             name="storage_condition"
             defaultValue={listing?.storage_condition ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           >
             <option value="">선택 안 함</option>
             {STORAGE_CONDITIONS.map((item) => (
@@ -275,16 +277,16 @@ export function ListingForm({ action, listing }: ListingFormProps) {
           <input
             name="original_packing_unit"
             defaultValue={listing?.original_packing_unit ?? ""}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
         </label>
       </div>
 
       <div className="border-b border-line pb-4 pt-2">
-        <h2 className="text-xl font-extrabold tracking-tight text-slate-950">
+        <h2 className="text-xl font-semibold tracking-tight text-ink">
           사진과 서류
         </h2>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-sub">
           사진은 필수, MSDS/COA/SDS는 권장입니다. 첨부 서류는 로그인 사용자에게만 노출됩니다.
         </p>
       </div>
@@ -298,9 +300,9 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             multiple
             accept="image/*"
             required={!isEdit}
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-sub">
             실물/패킹 구분 없이 한 칸에서 여러 장 업로드합니다.
           </span>
         </label>
@@ -311,16 +313,16 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="docs"
             multiple
             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-            className="rounded-md border border-slate-300 px-3 py-2"
+            className={field}
           />
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-sub">
             권장 항목입니다. 첨부 파일명에 MSDS 또는 COA가 있으면 자동 표시됩니다.
           </span>
         </label>
       </div>
 
       {isEdit && listing?.listing_images?.length ? (
-        <div className="rounded-md bg-slate-50 p-3 text-sm text-slate-600">
+        <div className="rounded-lg bg-surface p-3 text-sm text-sub">
           기존 사진 {listing.listing_images.length}장이 등록되어 있습니다.
         </div>
       ) : null}
@@ -331,12 +333,12 @@ export function ListingForm({ action, listing }: ListingFormProps) {
           name="notes"
           rows={5}
           defaultValue={listing?.notes ?? ""}
-          className="rounded-md border border-slate-300 px-3 py-2"
+          className={field}
         />
       </label>
 
       <div className="flex justify-end">
-        <button className="rounded-sm bg-accent-strong px-5 py-2.5 text-sm font-bold text-white hover:bg-accent">
+        <button className="rounded-lg bg-ink px-6 py-3 text-sm font-semibold text-white hover:opacity-90">
           저장
         </button>
       </div>

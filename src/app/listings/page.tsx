@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ListingFilters } from "@/components/listing-filters";
-import { ListingTable } from "@/components/listing-table";
+import { LotList } from "@/components/lot-list";
+import { Badge } from "@/components/badge";
 import { StatusBanner } from "@/components/status-banner";
-import { getListings, type SearchParams } from "@/lib/queries";
+import { getCurrentUser, getListings, type SearchParams } from "@/lib/queries";
+import { buildLotViews } from "@/lib/listing-view";
 
 export const dynamic = "force-dynamic";
 
@@ -58,23 +60,20 @@ function pageHref(params: SearchParams, page: number) {
 
 export default async function ListingsPage({ searchParams }: ListingsPageProps) {
   const params = (await searchParams) ?? {};
-  const result = await getListings(params);
+  const [result, user] = await Promise.all([getListings(params), getCurrentUser()]);
+  const lots = await buildLotViews(result.listings);
   const chips = filterChips(params);
   const totalPages = Math.max(1, Math.ceil(result.count / result.pageSize));
 
   return (
-    <main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-3 border-b border-line pb-5 sm:flex-row sm:items-end sm:justify-between">
+    <main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-10 sm:px-6 lg:px-8">
+      <div className="flex flex-col gap-3 border-b border-line pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-accent">Search inventory</p>
-          <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">원료검색</h1>
-          <p className="mt-1 text-sm text-slate-500">검색 결과는 원본 형식의 표로만 표시합니다.</p>
+          <p className="font-lat text-xs uppercase tracking-[0.2em] text-sub">Search Inventory</p>
+          <h1 className="mt-2 text-3xl font-medium tracking-tight text-ink">원료 검색</h1>
         </div>
-        <Link
-          href="/listings/new"
-          className="inline-flex items-center justify-center rounded-sm bg-accent-strong px-4 py-2.5 text-sm font-bold text-white hover:bg-accent"
-        >
-          원료등록
+        <Link href="/listings/new" className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white hover:opacity-90">
+          원료 등록
         </Link>
       </div>
 
@@ -82,13 +81,11 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
 
       <section className="space-y-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm font-bold text-slate-700">총 {result.count}개 결과</div>
+          <div className="text-sm font-semibold text-ink">총 {result.count}개 결과</div>
           {chips.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {chips.map((chip) => (
-                <span key={chip} className="rounded-full bg-accent-soft px-3 py-1 text-xs font-bold text-accent-strong">
-                  {chip}
-                </span>
+                <Badge key={chip} tone="muted">{chip}</Badge>
               ))}
             </div>
           ) : null}
@@ -97,29 +94,18 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
           <StatusBanner>Supabase 환경변수 설정 전이라 검색 데이터가 비어 있습니다.</StatusBanner>
         ) : null}
         {result.error ? <StatusBanner type="error">{result.error}</StatusBanner> : null}
-        <ListingTable
-          listings={result.listings}
-          page={result.page}
-          pageSize={result.pageSize}
-          emptyText="검색 조건에 맞는 원료가 없습니다."
-        />
+        <LotList items={lots} loggedIn={Boolean(user)} emptyText="검색 조건에 맞는 원료가 없습니다." />
         <div className="flex items-center justify-between border-t border-line pt-4 text-sm">
           <Link
             href={pageHref(params, Math.max(1, result.page - 1))}
-            className={`rounded-sm border px-3 py-2 font-bold ${
-              result.page <= 1 ? "pointer-events-none text-slate-300" : "text-slate-700"
-            }`}
+            className={`rounded-lg border border-line px-4 py-2.5 font-semibold ${result.page <= 1 ? "pointer-events-none text-sub/40" : "text-ink hover:bg-surface"}`}
           >
             이전
           </Link>
-          <span className="text-slate-500">
-            {result.page} / {totalPages}
-          </span>
+          <span className="text-sub">{result.page} / {totalPages}</span>
           <Link
             href={pageHref(params, Math.min(totalPages, result.page + 1))}
-            className={`rounded-sm border px-3 py-2 font-bold ${
-              result.page >= totalPages ? "pointer-events-none text-slate-300" : "text-slate-700"
-            }`}
+            className={`rounded-lg border border-line px-4 py-2.5 font-semibold ${result.page >= totalPages ? "pointer-events-none text-sub/40" : "text-ink hover:bg-surface"}`}
           >
             다음
           </Link>
