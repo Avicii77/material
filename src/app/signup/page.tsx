@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signUpWithEmail } from "@/app/signup/actions";
+import { signInWithGoogle } from "@/app/login/actions";
 import { StatusBanner } from "@/components/status-banner";
 import type { SearchParams } from "@/lib/queries";
 
@@ -21,14 +22,18 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
         <p className="mt-2 text-sm text-sub">가입 후 마이페이지에서 연락처 프로필을 보완합니다.</p>
       </div>
       {error ? <StatusBanner type="error">{error}</StatusBanner> : null}
+      <form action={signInWithGoogle}>
+        <input type="hidden" name="next" value="/mypage" />
+        <button className="w-full rounded-full border border-line bg-white px-4 py-2.5 text-sm font-bold hover:bg-surface">
+          Google로 회원가입
+        </button>
+      </form>
+      <div className="flex items-center gap-3 text-xs text-sub">
+        <span className="h-px flex-1 bg-line" />
+        또는 이메일로 가입
+        <span className="h-px flex-1 bg-line" />
+      </div>
       <form action={signUpWithEmail} className="space-y-4 rounded-2xl border border-line bg-card p-6">
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-ink">이름</span>
-          <input
-            name="display_name"
-            className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
-          />
-        </label>
         <label className="flex flex-col gap-1 text-sm">
           <span className="font-semibold text-ink">이메일</span>
           <input
