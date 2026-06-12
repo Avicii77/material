@@ -207,15 +207,6 @@ export function ListingFilters({ searchParams }: { searchParams: SearchParams })
               </FieldLabel>
             </div>
 
-            <FieldLabel label="지역">
-              <input
-                name="region"
-                defaultValue={value(searchParams, "region")}
-                className={inputClass}
-                placeholder="예: 경기, 서울, 부산"
-              />
-            </FieldLabel>
-
             <div className="flex flex-wrap gap-4 border-t border-line pt-4 text-sm font-medium text-ink">
               <label className="inline-flex items-center gap-2">
                 <input

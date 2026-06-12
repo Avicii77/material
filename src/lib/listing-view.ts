@@ -8,8 +8,6 @@ export type LotView = {
   casNo: string;
   typeCategory: string;
   manufacturer: string;
-  supplier: string;
-  region: string | null;
   quantity: number;
   unit: string;
   expiryLabel: string;
@@ -52,8 +50,6 @@ export async function buildLotViews(listings: Listing[]): Promise<LotView[]> {
         casNo: l.cas_no,
         typeCategory: l.type_category,
         manufacturer: l.manufacturer,
-        supplier: l.supplier,
-        region: l.region,
         quantity: l.quantity,
         unit: l.unit,
         expiryLabel: expiry.label,

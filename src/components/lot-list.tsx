@@ -31,7 +31,7 @@ function CompactCard({ item, onClick }: { item: LotView; onClick: () => void }) 
       </div>
       <div className="flex flex-1 flex-col p-4">
         <div className="truncate text-sm font-semibold text-ink">{item.title}</div>
-        <div className="mt-1 truncate text-xs text-sub">CAS {item.casNo} · {item.supplier}</div>
+        <div className="mt-1 truncate text-xs text-sub">CAS {item.casNo}</div>
         <div className="mt-2 flex items-center justify-between gap-2">
           <span className="text-sm font-bold text-ink">{item.priceLabel}</span>
           <span className={`shrink-0 text-[11px] ${item.expired ? "text-signal" : "text-sub"}`}>
@@ -78,7 +78,7 @@ function ExpandedCard({
           <div className="flex items-start justify-between gap-3">
             <div>
               <h3 className="text-lg font-semibold text-ink">{item.title}</h3>
-              <p className="mt-0.5 text-xs text-sub">CAS {item.casNo} · {item.supplier} · {item.typeCategory}</p>
+              <p className="mt-0.5 text-xs text-sub">CAS {item.casNo} · {item.typeCategory}</p>
             </div>
             <button
               type="button"

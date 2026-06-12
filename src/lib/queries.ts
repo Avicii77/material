@@ -28,7 +28,6 @@ export type Listing = {
   inci_name: string;
   cas_no: string;
   manufacturer: string;
-  supplier: string;
   type_category: string;
   function_tags: string[] | null;
   cert_tags: string[] | null;
@@ -40,7 +39,6 @@ export type Listing = {
   price: number | null;
   price_negotiable: boolean;
   discount_rate: number | null;
-  region: string | null;
   opened_status: string | null;
   storage_condition: string | null;
   original_packing_unit: string | null;
@@ -242,9 +240,6 @@ export async function getListings(
 
   const qtyMax = numberParam(params, "qtyMax");
   if (qtyMax !== null) query = query.lte("quantity", qtyMax);
-
-  const region = firstParam(params, "region")?.trim();
-  if (region) query = query.ilike("region", `%${region}%`);
 
   if (booleanParam(params, "negotiableOnly")) {
     query = query.eq("price_negotiable", true);

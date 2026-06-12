@@ -17,7 +17,6 @@ export type ListingFormValues = {
   inci_name: string;
   cas_no: string;
   manufacturer: string;
-  supplier: string;
   type_category: string;
   function_tags: string[];
   cert_tags: string[];
@@ -27,7 +26,6 @@ export type ListingFormValues = {
   price: number | null;
   price_negotiable: boolean;
   discount_rate: number | null;
-  region: string | null;
   opened_status: OpenedStatus | null;
   storage_condition: StorageCondition | null;
   original_packing_unit: string | null;
@@ -133,7 +131,6 @@ export function parseListingForm(
   const inciName = text(formData, "inci_name");
   const casNo = text(formData, "cas_no");
   const manufacturer = text(formData, "manufacturer");
-  const supplier = text(formData, "supplier");
   const typeCategory = text(formData, "type_category");
   const functionTags = stringArray(formData, "function_tags");
   const certTags = stringArray(formData, "cert_tags");
@@ -153,7 +150,6 @@ export function parseListingForm(
   if (!inciName) errors.push("영문명을 입력해 주세요.");
   if (!casNo) errors.push("CAS-NO를 입력해 주세요.");
   if (!manufacturer) errors.push("제조원을 입력해 주세요.");
-  if (!supplier) errors.push("공급처를 입력해 주세요.");
   if (!isAllowed(typeCategory, TYPES)) errors.push("종류를 선택해 주세요.");
   if (!isSubset(functionTags, FUNCTIONS)) errors.push("기능 선택값이 올바르지 않습니다.");
   if (!isSubset(certTags, CERTS)) errors.push("인증서 선택값이 올바르지 않습니다.");
@@ -210,7 +206,6 @@ export function parseListingForm(
       inci_name: inciName,
       cas_no: casNo,
       manufacturer,
-      supplier,
       type_category: typeCategory,
       function_tags: functionTags,
       cert_tags: certTags,
@@ -220,7 +215,6 @@ export function parseListingForm(
       price,
       price_negotiable: priceNegotiable,
       discount_rate: discountRate,
-      region: nullableText(formData, "region"),
       opened_status: openedStatus as OpenedStatus | null,
       storage_condition: storageCondition as StorageCondition | null,
       original_packing_unit: nullableText(formData, "original_packing_unit"),

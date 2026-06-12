@@ -76,15 +76,6 @@ export function ListingForm({ action, listing }: ListingFormProps) {
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium">공급처 *</span>
-          <input
-            name="supplier"
-            required
-            defaultValue={listing?.supplier ?? ""}
-            className={field}
-          />
-        </label>
-        <label className="flex flex-col gap-1 text-sm">
           <span className="font-medium">종류 *</span>
           <select
             name="type_category"
@@ -144,7 +135,7 @@ export function ListingForm({ action, listing }: ListingFormProps) {
         </label>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-3">
         <label className="flex flex-col gap-1 text-sm">
           <span className="font-medium">수량 *</span>
           <input
@@ -179,14 +170,6 @@ export function ListingForm({ action, listing }: ListingFormProps) {
             name="expiry_date"
             required
             defaultValue={listing?.expiry_date ?? ""}
-            className={field}
-          />
-        </label>
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium">지역</span>
-          <input
-            name="region"
-            defaultValue={listing?.region ?? ""}
             className={field}
           />
         </label>

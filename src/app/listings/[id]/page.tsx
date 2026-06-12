@@ -113,8 +113,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
                 {expiry.label} <span className="text-sm font-medium text-sub">{expiry.helper}</span>
               </InfoItem>
               <InfoItem label="가격">{formatPrice(listing.price, listing.price_negotiable)}</InfoItem>
-              <InfoItem label="공급처/제조원">{listing.supplier} / {listing.manufacturer}</InfoItem>
-              <InfoItem label="지역">{listing.region ?? "-"}</InfoItem>
+              <InfoItem label="제조원">{listing.manufacturer}</InfoItem>
               <InfoItem label="개봉여부">{openedLabel(listing.opened_status)}</InfoItem>
               <InfoItem label="보관상태">{storageLabel(listing.storage_condition)}</InfoItem>
               <InfoItem label="원래 패킹 단위">{listing.original_packing_unit ?? "-"}</InfoItem>

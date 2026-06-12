@@ -25,7 +25,6 @@ function filterChips(params: SearchParams) {
     excludeExpired: "만료 제외",
     opened: "개봉",
     storage: "보관",
-    region: "지역",
     qtyMin: "수량 최소",
     qtyMax: "수량 최대",
     priceMin: "가격 최소",

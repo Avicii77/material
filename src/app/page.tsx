@@ -13,7 +13,6 @@ type PreviewLot = Pick<
   | "id"
   | "title"
   | "casNo"
-  | "supplier"
   | "quantity"
   | "unit"
   | "expiryLabel"
@@ -28,7 +27,6 @@ const sampleLots: PreviewLot[] = [
     id: "sample-niacinamide",
     title: "Niacinamide",
     casNo: "98-92-0",
-    supplier: "Seoul Lab",
     quantity: 25,
     unit: "kg",
     expiryLabel: "2026.09",
@@ -41,7 +39,6 @@ const sampleLots: PreviewLot[] = [
     id: "sample-tocopherol",
     title: "Tocopherol",
     casNo: "59-02-9",
-    supplier: "Daehan",
     quantity: 5,
     unit: "kg",
     expiryLabel: "2026.07",
@@ -54,7 +51,6 @@ const sampleLots: PreviewLot[] = [
     id: "sample-centella",
     title: "Centella Asiatica Extract",
     casNo: "84696-21-9",
-    supplier: "BioPure",
     quantity: 12,
     unit: "kg",
     expiryLabel: "2027.01",
@@ -67,7 +63,6 @@ const sampleLots: PreviewLot[] = [
     id: "sample-retinol",
     title: "Retinol 10%",
     casNo: "68-26-8",
-    supplier: "BioPure",
     quantity: 1,
     unit: "kg",
     expiryLabel: "2026.12",
@@ -87,7 +82,7 @@ function FeaturedMaterial({ item }: { item: PreviewLot }) {
         <div className="flex items-start justify-between gap-5">
           <div>
             <h3 className="text-[22px] font-semibold tracking-tight text-ink">{item.title}</h3>
-            <p className="mt-1 text-sm text-sub">CAS {item.casNo} · {item.supplier}</p>
+            <p className="mt-1 text-sm text-sub">CAS {item.casNo}</p>
           </div>
           <div className="shrink-0 text-right font-lat text-xl font-semibold text-ink">
             {item.priceLabel}
@@ -118,7 +113,7 @@ function CompactMaterialRow({ item }: { item: PreviewLot }) {
         <div className="truncate text-[14.5px] font-semibold text-ink">{item.title}</div>
         <div className="mt-1 truncate text-[11.5px] text-sub">
           CAS {item.casNo} · {item.quantity}
-          {item.unit} · {item.supplier}
+          {item.unit}
         </div>
       </div>
       <div className="ml-auto shrink-0 text-right">
