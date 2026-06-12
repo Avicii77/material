@@ -66,7 +66,6 @@ export type Profile = {
   company_name: string | null;
   phone: string | null;
   contact_email: string | null;
-  region: string | null;
   membership_tier: "free" | "pro";
 };
 
@@ -404,7 +403,7 @@ export async function getProfile(userId: string): Promise<Profile | null> {
   const { data } = await supabase
     .from("profiles")
     .select(
-      "id, display_name, contact_name, company_name, phone, contact_email, region, membership_tier",
+      "id, display_name, contact_name, company_name, phone, contact_email, membership_tier",
     )
     .eq("id", userId)
     .maybeSingle();

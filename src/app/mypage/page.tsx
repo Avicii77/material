@@ -95,14 +95,6 @@ export default async function MyPage({ searchParams }: MyPageProps) {
               className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
-            <span className="font-medium">지역</span>
-            <input
-              name="region"
-              defaultValue={data.profile?.region ?? ""}
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
-            />
-          </label>
           <div className="md:col-span-2">
             <button className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 active:scale-95">
               프로필 저장

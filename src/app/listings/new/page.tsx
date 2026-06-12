@@ -26,7 +26,7 @@ export default async function NewListingPage({ searchParams }: NewListingPagePro
         <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink">원료 등록</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-sub">
           사진은 한 칸에서 여러 장 업로드하며 최소 1장 이상 필요합니다.
-          거래 판단에 필요한 제조원, 공급처, CAS-NO, 서류 보유 여부를 정확히 입력해 주세요.
+          거래 판단에 필요한 제조원, CAS-NO, 서류 보유 여부를 정확히 입력해 주세요.
         </p>
       </div>
       {error ? <StatusBanner type="error">{error}</StatusBanner> : null}

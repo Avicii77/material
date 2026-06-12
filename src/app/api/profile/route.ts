@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
     company_name: text(formData, "company_name"),
     phone: text(formData, "phone"),
     contact_email: text(formData, "contact_email"),
-    region: text(formData, "region"),
   });
 
   if (error) {
