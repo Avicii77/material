@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { signInWithEmail, signInWithGoogle } from "@/app/login/actions";
+import { startWithEmail } from "@/app/login/actions";
 import { StatusBanner } from "@/components/status-banner";
 import type { SearchParams } from "@/lib/queries";
 
@@ -21,12 +20,12 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <div>
           <p className="font-lat text-xs uppercase tracking-[0.2em] text-sub">Member access</p>
           <h1 className="mt-2 text-3xl font-medium tracking-tight text-ink">로그인</h1>
-          <p className="mt-2 text-sm text-sub">로그인하면 연락처 열람, 찜, 등록이 가능합니다.</p>
+          <p className="mt-2 text-sm text-sub">이메일만 입력하면 비밀번호 없이 바로 로그인됩니다.</p>
         </div>
         {error ? <StatusBanner type="error">{error}</StatusBanner> : null}
         {message ? <StatusBanner type="success">{message}</StatusBanner> : null}
-        <form action={signInWithEmail} className="space-y-4 rounded-2xl border border-line bg-card p-6">
-          <input type="hidden" name="next" value={next ?? "/mypage"} />
+        <form action={startWithEmail} className="space-y-4 rounded-2xl border border-line bg-card p-6">
+          <input type="hidden" name="next" value={next ?? "/listings"} />
           <label className="flex flex-col gap-1 text-sm">
             <span className="font-semibold text-ink">이메일</span>
             <input
@@ -36,31 +35,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
-            <span className="font-semibold text-ink">비밀번호</span>
-            <input
-              type="password"
-              name="password"
-              required
-              className="rounded-lg border border-line px-3.5 py-2.5 text-sm focus:border-accent"
-            />
-          </label>
           <button className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-bold text-white transition hover:opacity-90 active:scale-95">
-            이메일 로그인
+            이메일로 바로 시작
           </button>
         </form>
-        <form action={signInWithGoogle}>
-          <input type="hidden" name="next" value={next ?? "/mypage"} />
-          <button className="w-full rounded-full border border-line bg-white px-4 py-2.5 text-sm font-bold hover:bg-surface">
-            Google로 로그인
-          </button>
-        </form>
-        <p className="text-center text-sm text-sub">
-          계정이 없나요?{" "}
-          <Link href="/signup" className="font-semibold text-ink underline">
-            회원가입
-          </Link>
-        </p>
       </section>
 
       <aside className="rounded-2xl border border-line bg-card p-6">
