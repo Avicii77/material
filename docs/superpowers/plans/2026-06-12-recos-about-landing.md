@@ -226,13 +226,13 @@ git commit -m "feat: 관심 등록 폼(EmailCapture) 컴포넌트"
 
 - [ ] **Step 1: 7개 섹션 컴포넌트 작성** — 파일별 1책임
 
-  - `about/hero.tsx`: eyebrow + H1(굵기 대비) + sub + 버튼 2개(`/listings/new`, `/listings`) + `LandingPreview`
+  - `about/hero.tsx`: eyebrow + H1(굵기 대비) + sub + 무료 배지("등록 무료 · 수수료 무료") + `LandingPreview` (**버튼 CTA 없음**)
   - `about/problem-grid.tsx`: 헤더 + 4카드(01~04)
   - `about/before-after.tsx`: 헤더 + 2열 대비 표 + 3단계(① 등록 → ② 연결 → ③ 거래)
   - `about/trust-pillars.tsx`: 헤더 + 3요소(서류 검증·실물 확인·권한 제어)
   - `about/value-stack.tsx`: 헤더 + 체크리스트 5항목(무료·수수료 무료 강조)
   - `about/urgency-band.tsx`: 헤더 + 본문, `text-signal` 포인트(정직한 유효기한 긴급성)
-  - `about/final-cta.tsx`: 보증 문구 + `<TradeNotice />` + 버튼 2개
+  - `about/final-cta.tsx`: 헤더 + 보증 문구 + `<TradeNotice />` (**버튼 CTA 없음**)
 
   각 컴포넌트는 props 없는 순수 표현 컴포넌트. 카피는 스펙 §3에서 그대로 옮긴다(미검증 수치·후기 금지).
 
@@ -322,7 +322,7 @@ Expected: 둘 다 통과(에러 0).
 Run: `npm run dev` 후 `http://localhost:3000/about`
 Expected:
 - 7개 섹션 + 관심 등록 밴드가 토큰 색/타이포로 렌더, 모바일 단일 컬럼/데스크톱 반응형
-- 주 CTA → `/listings/new`, 보조 CTA → `/listings`
+- 히어로·최종 섹션에 버튼 CTA 없음 (주 전환 = 이메일 관심 등록)
 - 관심 등록: 유효 이메일 제출 시 성공 메시지, 잘못된 이메일 시 인라인 에러, 중복 시 "이미 등록된 이메일" 안내
 - 카피에 미검증 수치·후기 없음
 

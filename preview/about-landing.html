@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReCos · /about 랜딩 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --surface:#f7f8f9; --ink:#14171a; --sub:#6b7280;
+    --line:#e8eaed; --line-soft:#f0f1f3; --signal:#c0492e; --band:#0e1113;
+    --kr:"Noto Sans KR"; --lat:"Inter Tight";
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--kr),var(--lat),system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+  .banner{background:var(--band);color:#cfd3d6;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:9px}
+  .frame{max-width:1180px;margin:0 auto;padding:0 32px}
+  a{color:inherit;text-decoration:none}
+  .sig{color:var(--signal)}
+
+  /* header */
+  header{display:flex;align-items:center;justify-content:space-between;height:80px;border-bottom:1px solid var(--line)}
+  .logo{font-family:var(--lat);font-weight:700;font-size:22px;letter-spacing:-.02em}
+  nav{display:flex;gap:34px;font-size:15px;font-weight:600;color:#2a2e33}
+  nav span{padding:6px 0;border-bottom:2px solid transparent;cursor:pointer}
+  nav span.on,nav span:hover{border-bottom-color:var(--ink)}
+  .hbtns{display:flex;gap:12px;align-items:center;font-size:14px}
+  .hbtns .ghost{font-weight:600;padding:11px 18px;border:1px solid var(--line);border-radius:9px}
+  .hbtns .solid{background:var(--ink);color:#fff;padding:11px 20px;border-radius:9px;font-weight:600}
+
+  /* hero */
+  .hero{padding:80px 0 72px;border-bottom:1px solid var(--line)}
+  .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+  .eyebrow{font-family:var(--lat);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub)}
+  .hero h1{font-family:var(--kr);font-weight:300;font-size:50px;line-height:1.2;letter-spacing:-.03em;margin-top:20px}
+  .hero h1 b{font-weight:800}
+  .hero p.sub{margin-top:22px;font-size:16.5px;color:var(--sub);max-width:480px;line-height:1.75}
+  .hero p.sub b{color:var(--ink);font-weight:700}
+  .cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+  .cta .solid{background:var(--ink);color:#fff;padding:15px 26px;border-radius:9px;font-size:15px;font-weight:600}
+  .cta .line{border:1px solid var(--line);padding:15px 26px;border-radius:9px;font-size:15px;font-weight:600}
+  .freebadge{margin-top:18px;font-size:13px;color:var(--sub)}
+  .freebadge b{color:var(--ink)}
+
+  /* hero console mock */
+  .console{border:1px solid var(--line);border-radius:24px;background:var(--surface);overflow:hidden;box-shadow:0 28px 90px rgba(26,22,21,.08)}
+  .console .bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.7)}
+  .dots{display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:99px;background:#d9c5b7;display:block}
+  .dots i:nth-child(2){background:#c8b5a8}.dots i:nth-child(3){background:#a9978c}
+  .console .barlab{font-family:var(--lat);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub)}
+  .console .pad{padding:16px}
+  .tabs{display:flex;gap:8px;margin-bottom:14px}
+  .tabs b{font-size:13px;font-weight:600;padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:#fff}
+  .tabs b.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .search{display:grid;grid-template-columns:1fr 78px;gap:8px;margin-bottom:12px}
+  .search .inp{background:#fff;border:1px solid var(--line);border-radius:99px;padding:11px 16px;font-size:13px;color:var(--sub)}
+  .search .go{background:var(--ink);color:#fff;border-radius:99px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
+  .rows{display:flex;flex-direction:column;gap:8px}
+  .row{display:grid;grid-template-columns:1.3fr .7fr .6fr .7fr;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:12px}
+  .row.first{border-color:rgba(20,23,26,.25)}
+  .row .nm{font-weight:700}.row .mut{color:var(--sub)}.row .exp{color:var(--signal);font-weight:600;text-align:right}
+
+  /* section base */
+  .sec{padding:84px 0;border-bottom:1px solid var(--line)}
+  .sec.surf{background:var(--surface)}
+  .kicker{font-family:var(--lat);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub)}
+  .sec h2{font-weight:300;font-size:38px;letter-spacing:-.025em;margin-top:12px;line-height:1.22;max-width:760px}
+  .sec h2 b{font-weight:800}
+  .sec .lead{margin-top:16px;font-size:16px;color:var(--sub);max-width:560px;line-height:1.75}
+
+  /* problem grid */
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+  .pcard{border:1px solid var(--line);border-radius:18px;padding:24px;background:#fff;min-height:190px;display:flex;flex-direction:column}
+  .pcard .no{font-family:var(--lat);font-size:13px;font-weight:700;color:var(--signal)}
+  .pcard h3{font-size:18px;font-weight:700;margin-top:14px}
+  .pcard p{font-size:13.5px;color:var(--sub);margin-top:10px;line-height:1.65}
+
+  /* before-after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px}
+  .bacol{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .bacol .h{padding:16px 22px;font-size:13px;font-weight:700;letter-spacing:.02em;border-bottom:1px solid var(--line)}
+  .bacol.now .h{background:var(--surface);color:var(--sub)}
+  .bacol.aft .h{background:var(--ink);color:#fff}
+  .bacol ul{list-style:none}
+  .bacol li{padding:18px 22px;font-size:15px;border-bottom:1px solid var(--line-soft)}
+  .bacol li:last-child{border-bottom:0}
+  .bacol.aft li b{font-weight:700}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  .step{border:1px dashed var(--line);border-radius:16px;padding:22px;background:#fff}
+  .step .n{font-family:var(--lat);font-size:13px;font-weight:700;color:var(--sub)}
+  .step h4{font-size:17px;font-weight:700;margin-top:8px}
+  .step p{font-size:13px;color:var(--sub);margin-top:8px;line-height:1.6}
+
+  /* trust */
+  .tg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+  .tcard{border:1px solid var(--line);border-radius:18px;padding:26px;background:#fff}
+  .tcard h3{font-size:18px;font-weight:700}
+  .tcard p{font-size:14px;color:var(--sub);margin-top:10px;line-height:1.65}
+
+  /* value stack */
+  .vs{margin-top:40px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px 40px;max-width:860px}
+  .vs li{list-style:none;display:flex;gap:14px;align-items:flex-start;font-size:16.5px;padding:6px 0}
+  .vs li .ck{flex:0 0 auto;width:24px;height:24px;border-radius:99px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px}
+  .vs li b{font-weight:700}
+
+  /* urgency */
+  .urg{background:var(--band);color:#fff;border-bottom:1px solid var(--band)}
+  .urg .kicker{color:#9aa0a6}
+  .urg h2{color:#fff}
+  .urg h2 b{color:var(--signal)}
+  .urg .lead{color:#c3c8cc;max-width:620px}
+
+  /* final cta */
+  .fcta h2{max-width:680px}
+  .guarantee{margin-top:20px;font-size:16px;color:var(--sub);max-width:560px;line-height:1.7}
+  .guarantee b{color:var(--ink);font-weight:700}
+  .notice{margin-top:28px;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:18px 20px;font-size:13.5px;color:var(--sub);max-width:680px;line-height:1.65}
+  .notice b{color:var(--ink);font-weight:700;display:block;margin-bottom:6px}
+
+  /* email capture */
+  .ec{background:var(--surface)}
+  .ecform{margin-top:24px;display:flex;gap:12px;max-width:560px;flex-wrap:wrap}
+  .ecform input{flex:1;min-width:240px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:15px 18px;font-size:15px}
+  .ecform button{background:var(--ink);color:#fff;border:0;border-radius:9px;padding:15px 26px;font-size:15px;font-weight:600;cursor:pointer}
+
+  footer{padding:40px 0;color:var(--sub);font-size:13px}
+
+  @media(max-width:900px){
+    .hero .grid,.pgrid,.ba,.steps,.tg,.vs{grid-template-columns:1fr}
+    .hero h1{font-size:38px}.sec h2{font-size:30px}
+    nav,.hbtns{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="banner">ReCos · Cosmetic raw material · Circular market</div>
+
+  <div class="frame">
+    <header>
+      <div class="logo">ReCos</div>
+      <nav><span>원료 검색</span><span class="on">소개</span><span>등록</span><span>피드백</span></nav>
+      <div class="hbtns"><span class="ghost">로그인</span><span class="solid">시작하기</span></div>
+    </header>
+  </div>
+
+  <!-- ① HERO -->
+  <section class="hero">
+    <div class="frame">
+      <div class="grid">
+        <div>
+          <p class="eyebrow">화장품 제조사 · 원료사 · OEM/ODM 담당자라면</p>
+          <h1>안 쓰는 원료는,<br><b>가만히 둘수록 손해입니다.</b></h1>
+          <p class="sub">ReCos는 유효기한이 남은 원료를 필요한 곳과 직접 연결해, <b>폐기 비용을 회수 기회로</b> 바꿉니다.</p>
+          <p class="freebadge"><b>등록 무료 · 수수료 무료</b> · 결제 중개 없이 직접 연결</p>
+        </div>
+        <div class="console">
+          <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="barlab">ReCos Market Console</div></div>
+          <div class="pad">
+            <div class="tabs"><b class="on">검색</b><b>판단</b><b>연락</b></div>
+            <div class="search"><div class="inp">원료명, INCI, CAS 검색</div><div class="go">검색</div></div>
+            <div class="rows">
+              <div class="row first"><span class="nm">Niacinamide</span><span class="mut">98-92-0</span><span class="mut">25 kg</span><span class="exp">2026.09</span></div>
+              <div class="row"><span class="nm">Squalane</span><span class="mut">111-01-3</span><span class="mut">12 L</span><span class="exp">2026.11</span></div>
+              <div class="row"><span class="nm">Centella Extract</span><span class="mut">84696-21-9</span><span class="mut">18 kg</span><span class="exp">2027.01</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② PROBLEM -->
+  <section class="sec">
+    <div class="frame">
+      <p class="kicker">The problem</p>
+      <h2>원료 재고, <b>쌓일수록 손해가 커지는 이유.</b></h2>
+      <div class="pgrid">
+        <div class="pcard"><div class="no">01</div><h3>폐기 비용</h3><p>멀쩡한 원료를, 돈을 내고 버립니다. 폐기물 처리비는 덤.</p></div>
+        <div class="pcard"><div class="no">02</div><h3>창고 점유</h3><p>안 쓰는 원료가 보관 공간과 관리 인력을 잡아먹습니다.</p></div>
+        <div class="pcard"><div class="no">03</div><h3>유효기한</h3><p>매일 가치가 줄고, 기한이 지나면 0원이 됩니다.</p></div>
+        <div class="pcard"><div class="no">04</div><h3>장부 손실</h3><p>구매가는 비용으로 남고, 회수액은 0원.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ BEFORE/AFTER -->
+  <section class="sec surf">
+    <div class="frame">
+      <p class="kicker">The shift</p>
+      <h2>ReCos를 만나면, <b>이렇게 달라집니다.</b></h2>
+      <div class="ba">
+        <div class="bacol now">
+          <div class="h">지금</div>
+          <ul><li>폐기 비용을 지출</li><li>창고에 방치</li><li>유효기한 카운트다운</li></ul>
+        </div>
+        <div class="bacol aft">
+          <div class="h">ReCos 이후</div>
+          <ul><li><b>회수 수익</b>이 발생</li><li>필요한 곳으로 <b>이동</b></li><li>기한 내 <b>거래 성사</b></li></ul>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">STEP 01</div><h4>등록</h4><p>사진 · CAS-NO · 서류(MSDS/COA)로 원료를 올립니다.</p></div>
+        <div class="step"><div class="n">STEP 02</div><h4>연결</h4><p>소량이 필요한 곳과 매칭됩니다.</p></div>
+        <div class="step"><div class="n">STEP 03</div><h4>거래</h4><p>직접 연락해 조건을 맞추고 거래합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ TRUST -->
+  <section class="sec">
+    <div class="frame">
+      <p class="kicker">Why it's safe</p>
+      <h2>처음 거래해도 <b>안심할 수 있게.</b></h2>
+      <p class="lead">초기 서비스라 화려한 후기 대신, 구조로 신뢰를 만듭니다.</p>
+      <div class="tg">
+        <div class="tcard"><h3>서류 검증</h3><p>MSDS · COA · CAS-NO · 공급처를 거래 전에 확인합니다.</p></div>
+        <div class="tcard"><h3>실물 확인</h3><p>실제 사진과 보관 상태를 공개합니다.</p></div>
+        <div class="tcard"><h3>권한 제어</h3><p>연락처는 로그인·서버 권한으로 보호하고, 결제 중개 없이 직접 연결합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ VALUE STACK -->
+  <section class="sec surf">
+    <div class="frame">
+      <p class="kicker">What you get</p>
+      <h2>ReCos가 <b>대신 해결하는 것들.</b></h2>
+      <ul class="vs">
+        <li><span class="ck">✓</span><span>폐기 업체를 따로 알아볼 필요 없음</span></li>
+        <li><span class="ck">✓</span><span>소량 구매처를 찾아다닐 필요 없음</span></li>
+        <li><span class="ck">✓</span><span>서류·사진으로 검증된 거래</span></li>
+        <li><span class="ck">✓</span><span>결제 수수료 없는 직접 연결</span></li>
+        <li><span class="ck">✓</span><span><b>등록은 무료, 몇 분이면 끝</b></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ⑥ URGENCY -->
+  <section class="sec urg">
+    <div class="frame">
+      <p class="kicker">Why now</p>
+      <h2>기다릴수록, <b>받을 수 있는 값은 줄어듭니다.</b></h2>
+      <p class="lead">유효기한은 매일 줄어들고, 기한이 가까운 원료일수록 거래는 어려워집니다. 지금 등록한 원료가 초기 등록 원료로 먼저 노출됩니다.</p>
+    </div>
+  </section>
+
+  <!-- ⑦ FINAL CTA -->
+  <section class="sec fcta">
+    <div class="frame">
+      <p class="kicker">Start now</p>
+      <h2>창고에 잠든 원료부터, <b>지금 등록하세요.</b></h2>
+      <p class="guarantee">등록은 무료입니다. 거래가 성사돼야 의미가 있고, <b>등록 자체는 부담이 없습니다.</b></p>
+      <div class="notice">
+        <b>거래 전 꼭 확인하세요</b>
+        ReCos는 회원 간 거래를 연결하는 중개형 정보 플랫폼입니다. 거래 분쟁·손해·계약 불이행·제품 품질 및 적법성은 거래 당사자가 직접 확인·책임지며, 플랫폼은 이에 대해 책임지지 않습니다.
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧ EMAIL CAPTURE -->
+  <section class="sec ec">
+    <div class="frame">
+      <p class="kicker">Stay in touch</p>
+      <h2>재고, <b>ReCos로 정리해보고 싶으세요?</b></h2>
+      <p class="lead">이메일을 남겨주시면 시작 방법과 ReCos 소식을 보내드립니다.</p>
+      <form class="ecform" onsubmit="return false">
+        <input type="email" placeholder="이메일 주소">
+        <button type="submit">관심 등록하기</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="frame"><footer>© 2026 ReCos · 화장품 원료 순환 마켓플레이스 (시안)</footer></div>
+</body>
+</html>
