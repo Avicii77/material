@@ -79,3 +79,63 @@ export async function submitEarlyAccess(data: EarlyAccessSubmission) {
     return { success: false, error: "서버 처리 중 오류가 발생했습니다." };
   }
 }
+
+export interface FeedbackSubmission {
+  email?: string;
+  message: string;
+}
+
+export async function submitFeedback(data: FeedbackSubmission) {
+  if (!data.message.trim()) {
+    return { success: false, error: "내용을 입력해 주세요." };
+  }
+
+  const payload = {
+    email: data.email?.trim() || null,
+    message: data.message.trim(),
+  };
+
+  try {
+    if (isSupabaseConfigured()) {
+      const supabase = await createClient();
+      const { error } = await supabase
+        .from("feedback")
+        .insert([payload]);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        return { success: false, error: `등록 중 오류가 발생했습니다: ${error.message}` };
+      }
+
+      return { success: true, dbSaved: true };
+    } else {
+      // Graceful degradation: save to local JSON file
+      const filePath = path.join(process.cwd(), "feedback_submissions.json");
+      let existing: Record<string, unknown>[] = [];
+      try {
+        const fileContent = await fs.readFile(filePath, "utf-8");
+        existing = JSON.parse(fileContent);
+      } catch {
+        // File doesn't exist yet, proceed with empty array
+      }
+
+      existing.push({
+        ...payload,
+        id: crypto.randomUUID(),
+        created_at: new Date().toISOString(),
+      });
+
+      await fs.writeFile(filePath, JSON.stringify(existing, null, 2), "utf-8");
+      console.log("Supabase not configured. Feedback saved to feedback_submissions.json:", payload);
+
+      return {
+        success: true,
+        dbSaved: false,
+        message: "로컬 파일에 저장되었습니다. (Supabase 미연결)",
+      };
+    }
+  } catch (error: unknown) {
+    console.error("Action error:", error);
+    return { success: false, error: "서버 처리 중 오류가 발생했습니다." };
+  }
+}

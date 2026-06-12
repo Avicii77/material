@@ -12,9 +12,9 @@ export function SiteFooter() {
           <Link className="hover:text-ink" href="/terms">
             면책 고지
           </Link>
-          <a className="hover:text-ink" href="mailto:contact@recos.local">
-            문의
-          </a>
+          <Link className="hover:text-ink" href="/feedback">
+            문의 / 피드백
+          </Link>
         </div>
       </div>
     </footer>

@@ -32,7 +32,7 @@ export async function signUpWithEmail(formData: FormData) {
       data: {
         name: formText(formData, "display_name"),
       },
-      emailRedirectTo: `${origin}/auth/callback?next=/mypage`,
+      emailRedirectTo: `${origin}/auth/callback?next=/listings`,
     },
   });
 
