@@ -18,6 +18,7 @@ export type ListingDoc = {
   id: string;
   doc_type: "msds" | "coa" | "sds";
   storage_path: string;
+  file_name?: string | null;
   signed_url?: string | null;
 };
 
@@ -79,7 +80,7 @@ export type ListingListResult = {
 };
 
 const listingSelect =
-  "*, listing_images(id, storage_path, sort), listing_docs(id, doc_type, storage_path)";
+  "*, listing_images(id, storage_path, sort), listing_docs(id, doc_type, storage_path, file_name)";
 
 function firstParam(params: SearchParams, key: string) {
   const value = params[key];
@@ -363,7 +364,11 @@ export async function getListingDetail(id: string) {
       docs.map(async (doc) => {
         const { data: signed } = await privilegedClient.storage
           .from("listing-docs")
-          .createSignedUrl(doc.storage_path, 60 * 30);
+          .createSignedUrl(
+            doc.storage_path,
+            60 * 30,
+            doc.file_name ? { download: doc.file_name } : undefined,
+          );
         return {
           ...doc,
           signed_url: signed?.signedUrl ?? null,

@@ -172,11 +172,11 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
                       href={doc.signed_url}
                       className="block rounded-full border border-ink px-3 py-2 font-bold text-ink hover:bg-surface"
                     >
-                      {doc.doc_type.toUpperCase()} 다운로드
+                      {doc.doc_type.toUpperCase()} · {doc.file_name ?? "다운로드"}
                     </a>
                   ) : (
                     <div key={doc.id} className="rounded-lg bg-surface px-3 py-2 text-sub">
-                      {doc.doc_type.toUpperCase()} · 로그인 후 다운로드
+                      {doc.doc_type.toUpperCase()} · {doc.file_name ?? "로그인 후 다운로드"}
                     </div>
                   ),
                 )

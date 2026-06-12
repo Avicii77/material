@@ -13,6 +13,7 @@ export type UploadedDocRow = {
   listing_id: string;
   doc_type: "msds" | "coa" | "sds";
   storage_path: string;
+  file_name: string;
 };
 
 async function uploadFile(
@@ -73,6 +74,7 @@ export async function uploadDocs(
       listing_id: listingId,
       doc_type: docType,
       storage_path: path,
+      file_name: doc.name,
     });
   }
 
