@@ -26,7 +26,9 @@ function CompactCard({ item, onClick }: { item: LotView; onClick: () => void }) 
           // eslint-disable-next-line @next/next/no-img-element
           <img src={item.imageUrls[0]} alt={item.title} className="size-full object-cover" />
         ) : (
-          <img src="/recos-material-hero.png" alt="" className="size-full object-cover" />
+          <div className="flex size-full items-center justify-center text-xs font-semibold uppercase tracking-[0.12em] text-sub">
+            No image
+          </div>
         )}
       </div>
       <div className="flex flex-1 flex-col p-4">
@@ -62,7 +64,9 @@ function ExpandedCard({
               // eslint-disable-next-line @next/next/no-img-element
               <img src={item.imageUrls[0]} alt={item.title} className="size-full object-cover" />
             ) : (
-              <img src="/recos-material-hero.png" alt="" className="size-full object-cover" />
+              <div className="flex size-full items-center justify-center text-xs font-semibold uppercase tracking-[0.12em] text-sub">
+                No image
+              </div>
             )}
           </div>
           {item.imageUrls.length > 1 ? (
