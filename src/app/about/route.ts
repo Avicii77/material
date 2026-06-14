@@ -10,7 +10,7 @@ const overrides = String.raw`
 <script id="recos-image-slot-overrides">
 (function () {
   var images = {
-    recovery: "/about/recovery-income.jpg",
+    recovery: "/about/recovery-income.png",
     register: "/about/step-register.jpg",
     match: "/about/step-match.jpg",
     trade: "/about/step-trade.jpg"
